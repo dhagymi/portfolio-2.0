@@ -1,4 +1,4 @@
-import express, { json, urlencoded } from "express";
+import express, { json, urlencoded, Router } from "express";
 import errorHandler from "errorhandler";
 import dotenv from "dotenv";
 import morgan from "morgan";
@@ -16,7 +16,7 @@ const app = express();
 dotenv.config();
 const PORT = process.env.PORT || 5000;
 const __dirname = dirname(fileURLToPath(import.meta.url));
-let lang = "en";
+const router = new Router();
 
 /* Middlewares */
 
@@ -65,24 +65,12 @@ app.use((req, res, next) => {
 	res.locals.isPhone = ua.device.type === "mobile";
 	res.locals.isTablet = ua.device.type === "tablet";
 
-	res.locals.lang = lang;
-
 	res.locals.Link = handleLinkResolver;
 
 	res.locals.PrismicDOM = PrismicDOM;
 
 	next();
 });
-
-/* app.post("/", (req, res) => {
-	try {
-		const { body } = req;
-		lang = body.lang;
-		res.status("200").send(lang);
-	} catch (error) {
-		res.status("404").send({ error: error.message });
-	}
-}); */
 
 app.set("views", join(__dirname, "views"));
 app.set("view engine", "pug");
@@ -93,8 +81,6 @@ const handleRequest = async (api) => {
 	const social = await api.getSingle("social");
 	/* 	const preloader = await api.getSingle("preloader"); */
 
-	console.log(meta.data);
-
 	return {
 		meta,
 		header,
@@ -103,31 +89,44 @@ const handleRequest = async (api) => {
 	};
 };
 
-app.get("/", async (req, res) => {
+router.get("/", async (req, res) => {
 	const api = await initApi(req);
 
 	const defaults = await handleRequest(api);
 	const home = await api.getSingle("home");
-	console.log(res.locals.lang);
+
 	res.render("pages/home", {
 		...defaults,
 		home,
 	});
 });
-app.get("/about", async (req, res) => {
+router.get("/about", async (req, res) => {
 	const api = await initApi(req);
 
 	const defaults = await handleRequest(api);
-
 	const about = await api.getSingle("about");
+
+	const cards = about.data.body
+		.filter((slice) => slice.slice_type === "card")
+		.map(({ items: [text], primary: { name, image } }) => {
+			return { text, name, image };
+		});
+
+	const { results } = await api.query(
+		Prismic.Predicates.at("document.type", "skills")
+	);
+
+	const skills = results.map((result) => result.data);
 
 	res.render("pages/about", {
 		...defaults,
 		about,
+		cards,
+		skills,
 	});
 });
 
-app.get("/contact", async (req, res) => {
+router.get("/contact", async (req, res) => {
 	const api = await initApi(req);
 
 	const defaults = await handleRequest(api);
@@ -139,7 +138,7 @@ app.get("/contact", async (req, res) => {
 	});
 });
 
-app.get("/works", async (req, res) => {
+router.get("/works", async (req, res) => {
 	const api = await initApi(req);
 
 	const defaults = await handleRequest(api);
@@ -153,15 +152,24 @@ app.get("/works", async (req, res) => {
 
 /*
 
-app.get("/*", async (req, res) => {
+router.get("/*", async (req, res) => {
 	const api = await initApi(req);
 
-	const defaults = await handleRequest(api);
+	const defaults = await handleRequest({req, api});
 
 	res.status(404).render("pages/error", {
 		...defaults,
 	});
 }); */
+
+app.use(
+	"/:lang",
+	(req, res, next) => {
+		res.locals.lang = req.params.lang;
+		next();
+	},
+	router
+);
 
 const server = app.listen(PORT, () =>
 	console.log(`Serve on http://localhost:${PORT}`)
