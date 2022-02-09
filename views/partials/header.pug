@@ -1,0 +1,11 @@
+header.header
+
+    a.header__logo(href="/")=meta.data.title
+        picture.header__logo__container!=item.svg
+
+    nav.header__navigation 
+        ul.header__navigation__list
+            each item in header.data.navigation_items
+                li.header__navigation__list__item
+                    a.header__navigation__list__link(href=Link(item.link))
+                        span=item.text
