@@ -17,6 +17,7 @@ dotenv.config();
 const PORT = process.env.PORT || 5000;
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const router = new Router();
+const availableLangs = ["en", "es"];
 
 /* Middlewares */
 
@@ -132,6 +133,8 @@ router.get("/contact", async (req, res) => {
 	const defaults = await handleRequest(api);
 	const contact = await api.getSingle("contact_page");
 
+	console.log(contact.data);
+
 	res.render("pages/contact", {
 		...defaults,
 		contact,
@@ -144,29 +147,39 @@ router.get("/works", async (req, res) => {
 	const defaults = await handleRequest(api);
 	const works = await api.getSingle("works_page");
 
+	const { results } = await api.query(
+		Prismic.Predicates.at("document.type", "work")
+	);
+
+	works.data.items = results.map((result) => result.data);
+
 	res.render("pages/works", {
 		...defaults,
 		works,
 	});
 });
 
-/*
-
 router.get("/*", async (req, res) => {
 	const api = await initApi(req);
 
-	const defaults = await handleRequest({req, api});
+	const defaults = await handleRequest(api);
+	const error = await api.getSingle("error_page");
 
 	res.status(404).render("pages/error", {
 		...defaults,
+		error,
 	});
-}); */
+});
 
 app.use(
 	"/:lang",
 	(req, res, next) => {
-		res.locals.lang = req.params.lang;
-		next();
+		if (availableLangs.includes(req.params.lang)) {
+			res.locals.lang = req.params.lang;
+			next();
+		} else {
+			res.redirect("/en/error");
+		}
 	},
 	router
 );
