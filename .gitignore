@@ -1,0 +1,9 @@
+/node_modules/
+.env
+tiempo
+/public/
+/.vscode/
+
+yarn.lock
+yarn.log
+yarn.error

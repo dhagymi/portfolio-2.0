@@ -1,0 +1,10 @@
+extends ../base.pug 
+
+block variables 
+    - var template = "error"
+
+block content
+    .error
+        section.error__wrapper
+            p.error__number=error.data.error_code
+            p.error__text=error.data.message[0][lang]

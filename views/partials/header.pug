@@ -1,0 +1,21 @@
+header.header
+
+    a.header__logo(href=Link(lang, header.data.logo_link))!=meta.data.title[0][lang]+header.data.logo_svg
+
+    button(class=`header__responsiveMenuButton ${isDesktop ? "" : "header__responsiveMenuButton--active"}`)
+        .header__responsiveMenuButton__stripe.header__responsiveMenuButton__stripe--1
+        .header__responsiveMenuButton__stripe.header__responsiveMenuButton__stripe--2
+
+    nav(class=`header__navigation ${isDesktop ? "header__navigation--active" : ""}`)
+        ul.header__navigation__list
+            each item in navigation
+                li.header__navigation__list__item
+                    a.header__navigation__list__link(href=Link(lang, item.link))
+                        span.header__navigation__list__label=item.label[0][lang]
+
+footer.footer 
+    ul.footer__list
+        each item in languages
+            li.footer__list__item
+                a.footer__list__link(href="/" data-language=item.short_key)
+                    span.footer__list__label=item.label[0][lang]

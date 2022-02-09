@@ -1,0 +1,27 @@
+extends ../base.pug 
+
+block variables 
+    - var template = "about"
+
+block content
+    .about
+        section.about__wrapper
+            each text, index in about.data.animated_text
+                p(class=`about__animatedText about__animatedText--${index + 1}`)
+                    span.about__animatedText__word.about__animatedText__word--1=text[lang]
+            .about__cards 
+                each card in cards 
+                    div(class=`card card--${card.name.toLowerCase()}`)
+                        figure.about__card__imageWrapper
+                            img.about__card__image(src=card.image.url alt=card.image.alt)
+                        figcaption.about__card__title=card.name
+                        .about__card__text!=PrismicDOM.RichText.asHtml(card.text[lang], Link)
+            .about__skills
+                h1.about__skills__title=about.data.title[0][lang]
+                each list, index in skills 
+                    div(class=`about__skills__wrapper about__skills__wrapper--${index + 1}`)
+                        h2.about__skills__title=list.description[0][lang]
+                        ul.about__skills__list 
+                            each item in list.item
+                                li.about__skills__item=item.text
+
