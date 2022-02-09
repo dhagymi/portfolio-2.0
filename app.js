@@ -16,6 +16,7 @@ const app = express();
 dotenv.config();
 const PORT = process.env.PORT || 5000;
 const __dirname = dirname(fileURLToPath(import.meta.url));
+let lang = "en";
 
 /* Middlewares */
 
@@ -42,21 +43,17 @@ const initApi = (req) => {
 };
 
 const handleLinkResolver = (doc) => {
-	/* 	if (doc.type === "concerts") {
-		return "/concerts";
+	if (doc.type === "about") {
+		return "/about";
 	}
 
 	if (doc.type === "contact_page") {
 		return "/contact";
 	}
 
-	if (doc.type === "music_page") {
-		return "/music";
+	if (doc.type === "works_page") {
+		return "/works";
 	}
-
-	if (doc.type === "gallery") {
-		return "/gallery";
-	} */
 
 	return "/";
 };
@@ -68,6 +65,8 @@ app.use((req, res, next) => {
 	res.locals.isPhone = ua.device.type === "mobile";
 	res.locals.isTablet = ua.device.type === "tablet";
 
+	res.locals.lang = lang;
+
 	res.locals.Link = handleLinkResolver;
 
 	res.locals.PrismicDOM = PrismicDOM;
@@ -75,67 +74,63 @@ app.use((req, res, next) => {
 	next();
 });
 
+/* app.post("/", (req, res) => {
+	try {
+		const { body } = req;
+		lang = body.lang;
+		res.status("200").send(lang);
+	} catch (error) {
+		res.status("404").send({ error: error.message });
+	}
+}); */
+
 app.set("views", join(__dirname, "views"));
 app.set("view engine", "pug");
 
-const handleRequest = async ({ api, autoAdminApi }) => {
-	/* 	const meta = await api.getSingle("meta");
+const handleRequest = async (api) => {
+	const meta = await api.getSingle("meta");
 	const header = await api.getSingle("header");
-	const options = await api.getSingle("options");
-	const preloader = await api.getSingle("preloader");
 	const social = await api.getSingle("social");
-	const footer = await api.getSingle("footer");
+	/* 	const preloader = await api.getSingle("preloader"); */
 
-	const concertsList = await contactService.getConcerts(autoAdminApi, Prismic);
+	console.log(meta.data);
 
 	return {
 		meta,
 		header,
-		preloader,
 		social,
-		footer,
-		options,
-		concertsList,
-	}; */
+		/* 		preloader, */
+	};
 };
 
-/* 
 app.get("/", async (req, res) => {
 	const api = await initApi(req);
-	const autoAdminApi = await initAutoAdminApi(req);
 
-	const defaults = await handleRequest({ api, autoAdminApi });
+	const defaults = await handleRequest(api);
 	const home = await api.getSingle("home");
-
-	home.data.spotify_link["target"] =
-		home.data.spotify_link && home.data.spotify_link.target
-			? home.data.spotify_link.target
-			: "";
-
+	console.log(res.locals.lang);
 	res.render("pages/home", {
 		...defaults,
 		home,
 	});
 });
-app.get("/concerts", async (req, res) => {
+app.get("/about", async (req, res) => {
 	const api = await initApi(req);
-	const autoAdminApi = await initAutoAdminApi(req);
 
-	const defaults = await handleRequest({ api, autoAdminApi });
+	const defaults = await handleRequest(api);
 
-	const concerts = await api.getSingle("concerts");
+	const about = await api.getSingle("about");
 
-	res.render("pages/concerts", {
+	res.render("pages/about", {
 		...defaults,
-		concerts,
+		about,
 	});
 });
 
 app.get("/contact", async (req, res) => {
 	const api = await initApi(req);
-	const autoAdminApi = await initAutoAdminApi(req);
 
-	const defaults = await handleRequest({ api, autoAdminApi });
+	const defaults = await handleRequest(api);
 	const contact = await api.getSingle("contact_page");
 
 	res.render("pages/contact", {
@@ -144,68 +139,24 @@ app.get("/contact", async (req, res) => {
 	});
 });
 
-app.get("/music", async (req, res) => {
+app.get("/works", async (req, res) => {
 	const api = await initApi(req);
-	const autoAdminApi = await initAutoAdminApi(req);
 
-	const defaults = await handleRequest({ api, autoAdminApi });
-	const music = await api.getSingle("music_page");
-	music.data["album"] = music.data.album.map(({ album_image, album_link }) => {
-		album_link["target"] =
-			album_link && album_link.target ? album_link.target : "";
-		return {
-			image: album_image,
-			link: album_link,
-		};
-	});
-	music.data["videos"] = music.data.videos.map(
-		({ video_image, video_link }) => {
-			video_link["target"] =
-				video_link && video_link.target ? video_link.target : "";
-			return {
-				image: video_image,
-				link: video_link,
-			};
-		}
-	);
+	const defaults = await handleRequest(api);
+	const works = await api.getSingle("works_page");
 
-	res.render("pages/music", {
+	res.render("pages/works", {
 		...defaults,
-		music,
+		works,
 	});
 });
 
-app.get("/gallery", async (req, res) => {
-	const api = await initApi(req);
-	const autoAdminApi = await initAutoAdminApi(req);
-
-	const defaults = await handleRequest({ api, autoAdminApi });
-	const gallery = await api.getSingle("gallery");
-	const {
-		data: { photo: galleryImages },
-	} = await autoAdminApi.getSingle("gallery_image");
-	const galleryData = [];
-
-	for (let i = 0; i < galleryImages.length / 9; i++) {
-		const gallerySet = [];
-		for (let j = 0; j < 9; j++) {
-			galleryImages[i * 9 + j] && gallerySet.push(galleryImages[i * 9 + j]);
-		}
-		galleryData.push(gallerySet);
-	}
-
-	res.render("pages/gallery", {
-		...defaults,
-		gallery,
-		galleryData,
-	});
-});
+/*
 
 app.get("/*", async (req, res) => {
 	const api = await initApi(req);
-	const autoAdminApi = await initAutoAdminApi(req);
 
-	const defaults = await handleRequest({ api, autoAdminApi });
+	const defaults = await handleRequest(api);
 
 	res.status(404).render("pages/error", {
 		...defaults,
