@@ -43,20 +43,20 @@ const initApi = (req) => {
 	});
 };
 
-const handleLinkResolver = (doc) => {
+const handleLinkResolver = (currentLang, doc) => {
 	if (doc.type === "about") {
-		return "/about";
+		return `/${currentLang}/about`;
 	}
 
 	if (doc.type === "contact_page") {
-		return "/contact";
+		return `/${currentLang}/contact`;
 	}
 
 	if (doc.type === "works_page") {
-		return "/works";
+		return `/${currentLang}/works`;
 	}
 
-	return "/";
+	return `/${currentLang}/`;
 };
 
 app.use((req, res, next) => {
@@ -79,13 +79,36 @@ app.set("view engine", "pug");
 const handleRequest = async (api) => {
 	const meta = await api.getSingle("meta");
 	const header = await api.getSingle("header");
-	const social = await api.getSingle("social");
+	const navigation = header.data.body
+		.filter((slice) => slice.slice_type === "navigation_item")
+		.map(({ items, primary: { link } }) => {
+			return {
+				label: items,
+				link,
+			};
+		});
+	const languages = header.data.body
+		.filter((slice) => slice.slice_type === "languages")
+		.map(({ items, primary: { short_key, abbreviation } }) => {
+			return {
+				label: items,
+				short_key,
+				abbreviation,
+			};
+		});
+	const {
+		data: { social_network: social },
+	} = await api.getSingle("social");
 	/* 	const preloader = await api.getSingle("preloader"); */
+
+	console.log(languages);
 
 	return {
 		meta,
 		header,
 		social,
+		navigation,
+		languages,
 		/* 		preloader, */
 	};
 };
@@ -132,8 +155,6 @@ router.get("/contact", async (req, res) => {
 
 	const defaults = await handleRequest(api);
 	const contact = await api.getSingle("contact_page");
-
-	console.log(contact.data);
 
 	res.render("pages/contact", {
 		...defaults,
@@ -183,6 +204,10 @@ app.use(
 	},
 	router
 );
+
+app.get("/", (req, res) => {
+	res.redirect("/en");
+});
 
 const server = app.listen(PORT, () =>
 	console.log(`Serve on http://localhost:${PORT}`)
