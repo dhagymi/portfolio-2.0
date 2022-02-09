@@ -2,7 +2,11 @@ header.header
 
     a.header__logo(href=Link(lang, header.data.logo_link))!=meta.data.title[0][lang]+header.data.logo_svg
 
-    nav.header__navigation 
+    button(class=`header__responsiveMenuButton ${isDesktop ? "" : "header__responsiveMenuButton--active"}`)
+        .header__responsiveMenuButton__stripe.header__responsiveMenuButton__stripe--1
+        .header__responsiveMenuButton__stripe.header__responsiveMenuButton__stripe--2
+
+    nav(class=`header__navigation ${isDesktop ? "header__navigation--active" : ""}`)
         ul.header__navigation__list
             each item in navigation
                 li.header__navigation__list__item
