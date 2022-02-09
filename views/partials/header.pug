@@ -1,11 +1,17 @@
 header.header
 
-    a.header__logo(href="/")=meta.data.title
-        picture.header__logo__container!=item.svg
+    a.header__logo(href=Link(lang, header.data.logo_link))!=meta.data.title[0][lang]+header.data.logo_svg
 
     nav.header__navigation 
         ul.header__navigation__list
-            each item in header.data.navigation_items
+            each item in navigation
                 li.header__navigation__list__item
-                    a.header__navigation__list__link(href=Link(item.link))
-                        span=item.text
+                    a.header__navigation__list__link(href=Link(lang, item.link))
+                        span.header__navigation__list__label=item.label[0][lang]
+
+footer.footer 
+    ul.footer__list
+        each item in languages
+            li.footer__list__item
+                a.footer__list__link(href="/" data-language=item.short_key)
+                    span.footer__list__label=item.label[0][lang]
