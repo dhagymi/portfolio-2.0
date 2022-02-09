@@ -54,10 +54,11 @@ html(class=isDesktop ? "desktop" : isTablet ? "tablet" : isPhone ? "phone" : "" 
 
 
     body
-        // include ./partials/cursor
-        // include ./partials/preloader
-        // include ./partials/scrollBar
+        include ./partials/cursor
+        include ./partials/preloader
+        include ./partials/scrollBar
         include ./partials/header
+        include ./partials/menu
 
         main.content#content(data-template=template)
             block content
