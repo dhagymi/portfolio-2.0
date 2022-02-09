@@ -101,8 +101,6 @@ const handleRequest = async (api) => {
 	} = await api.getSingle("social");
 	/* 	const preloader = await api.getSingle("preloader"); */
 
-	console.log(languages);
-
 	return {
 		meta,
 		header,
