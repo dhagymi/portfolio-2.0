@@ -1,0 +1,28 @@
+nav.menu
+    .menu__header
+        a.menu__header__logo(href=Link(lang, header.data.logo_link))!=meta.data.title[0][lang]+header.data.logo_svg
+
+        ul.menu__header__languages 
+            each lang, index in languages 
+                li.menu__header__languages__item
+                    a.menu__header__languages__link(href="/" data-language=lang.short_key)
+                        span.menu__header__languages__label=lang.abbreviation
+
+        button(class=`menu__header__close ${isDesktop ? "" : "menu__header__close--active"}`)
+            .menu__header__close__stripe.menu__header__close__stripe--1
+            .menu__header__close__stripe.menu__header__close__stripe--2
+            span.menu__header__close__label=header.data.close_text[0][lang]
+    
+    nav.menu__navigation
+        ul.menu__navigation__list
+            each item in navigation
+                li.menu__navigation__list__item
+                    a.menu__navigation__list__link(href=Link(lang, item.link))
+                        span.menu__navigation__list__label=item.label[0][lang]
+    
+    .menu__social 
+        ul.menu__social__list
+            each item in social
+                li.menu__social__list__item
+                    a.menu__social__list__link(href=item.link.url target=item.link.target)!=item.svg
+    
