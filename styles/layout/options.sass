@@ -1,10 +1,12 @@
 .options
     height: 100vh
+    pointer-events: none
     position: absolute
     width: 100vw
     z-index: z("options")
 
 .header
+    pointer-events: all
 
     &__logo
         font-size: 0
@@ -64,6 +66,7 @@
                         opacity: 1
 
 .footer
+    pointer-events: all
 
     &__list
         @extend %nav-24

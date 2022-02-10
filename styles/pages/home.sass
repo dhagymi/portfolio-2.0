@@ -19,10 +19,13 @@
         position: relative
 
     &__secondaryWrapper
+        padding: 23.6rem 30.9rem
 
     &__title
         @extend %title-120
-        letter-spacing: 7px
+        letter-spacing: 0.7rem
+        pointer-events: none
+        z-index: z("content")
 
         &__line
             display: block
@@ -39,30 +42,74 @@
                 margin-left: -20rem
 
     &__card
-        display: none
+        height: 71.8rem
         position: absolute
+        width: 54.2rem
 
-        &__image
+        &:hover
+            z-index: z("overContent")
 
         &__caption
+            @extend %name-144
+
+            color: $component-color
+            letter-spacing: 0.4rem
+            position: absolute
 
         &__image
+            height: 100%
+            width: 100%
 
         &--mica
+            left: 16rem
+            top: 19rem
+
+            figcaption
+                bottom: 3.3rem
+                right: 5.5rem
 
         &--agus
+            right: 0
+            bottom: 0
+
+            figcaption
+                top: 16rem
+                left: -14rem
 
     &__subtitle
+        @extend %title-120
+
+        text-align: left
+        letter-spacing: 1rem
 
         &__line
+            display: block
 
             &--1
+                letter-spacing: 1rem
 
             &--2
+                line-height: 1.05
+                margin-left: 7.5rem
+                letter-spacing: 1.3rem
 
     &__text
+        @extend %text-24
+
+        color: $text-color-2
+        display: flex
+        gap: 14.2rem
+        margin-top: 8rem
+        padding-left: 10rem
+        text-align: left
 
         &__column
+            width: 50rem
+            letter-spacing: 0.11rem
+            line-height: 4.55rem
+
+            strong
+                font-weight: bold
 
             &--1
 
