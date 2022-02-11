@@ -1,0 +1,46 @@
+.works
+    @extend %page
+
+    overflow: hidden
+    text-align: center
+
+    @extend %page--active
+
+    &--active
+        @extend %page--active
+
+    &__wrapper
+
+    &__title
+        @extend %title-120
+
+        left: 73.2rem
+        letter-spacing: .7rem
+        position: absolute
+        top: 40.5rem
+
+    &__cardsWrapper
+        position: absolute
+        height: 100vh
+        width: 100vw
+
+    &__card
+
+        &--1
+            left: 18rem
+            height: 45rem
+            position: absolute
+            top: 21rem
+            width: 40rem
+
+        &__link
+            display: inline-block
+            width: 100%
+            height: 100%
+
+        &__title
+            font-size: 0
+
+        &__image
+            width: 100%
+            height: 100%

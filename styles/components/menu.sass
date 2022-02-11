@@ -1,2 +1,112 @@
 .menu
-    display: none
+    background: $component-color
+    display: flex
+    flex-direction: column
+    left: 0
+    height: 100vh
+    justify-content: center
+    position: fixed
+    top: 0
+    visibility: hidden
+    width: 100vw
+    z-index: z("menu")
+
+    &__header
+        height: 34rem
+        left: 0
+        position: absolute
+        top: 0
+        width: 100vw
+
+        &__logo
+            font-size: 0
+            left: 5rem
+            position: absolute
+            top: 8rem
+            width: 9.5rem
+
+        &__languages
+            @extend %menu-18
+
+            display: flex
+            gap: 2.4rem
+            position: absolute
+            right: 14rem
+            top: 7.3rem
+
+            &__item
+                align-items: center
+                border: 2px solid white
+                border-radius: 50%
+                display: flex
+                height: 6rem
+                justify-content: center
+                transition: background .3s, color .3s
+                width: 6rem
+
+                &:hover
+                    background: $text-color
+                    color: $component-color
+
+            &__link
+
+            &__label
+
+        &__close
+            @extend %menu-24
+
+            position: absolute
+            right: -1rem
+            top: 14.5rem
+
+            &__stripe
+                background: $text-color
+                height: 0.3rem
+                position: absolute
+                right: 5.3rem
+                top: -4.3rem
+                width: 3.7rem
+
+                &--1
+                    transform: rotate(50deg) skew(-45deg)
+
+                &--2
+                    transform: rotate(-50deg) skew(45deg)
+
+            &__label
+                display: inline-block
+                transform: rotate(-90deg) translate(-50%, -50%)
+
+    &__navigation
+        @extend %menu-90
+
+        margin-left: 6.7rem
+        line-height: 1.18
+
+        &__list
+
+            &__item
+
+            &__link
+
+            &__label
+
+    &__social
+        position: absolute
+        right: 4.5rem
+
+        &__list
+            display: flex
+            flex-direction: column
+            gap: 4rem
+
+            &__item
+                height: 3rem
+                text-align: center
+                width: 3rem
+
+                svg
+                    max-height: 100%
+                    max-width: 100%
+
+            &__link

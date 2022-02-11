@@ -8,13 +8,13 @@ block content
         section.contact__wrapper
             h1.contact__title
                 each line, index in contact.data.titles 
-                    span(class=`contact__title__line contact__title__line--${index}`)=line[lang]
+                    span(class=`contact__title__line contact__title__line--${index + 1}`)=line[lang]
             .contact__subtitles
                 each line, index in contact.data.subtitles 
-                    span(class=`contact__subtitles__line contact__subtitles__line--${index}`)=line[lang]
+                    span(class=`contact__subtitles__line contact__subtitles__line--${index + 1}`)=line[lang]
             .contact__body
                 each line, index in contact.data.secondary_titles 
-                    span(class=`contact__body__line contact__body__line--${index}`)=line[lang]
+                    span(class=`contact__body__line contact__body__line--${index + 1}`)=line[lang]
                 button.contact__body__button=contact.data.button_text[0][lang]
             .contact__footer
                 p.contact__footer__thanks=contact.data.thanks[0][lang]
