@@ -1,0 +1,109 @@
+.contact
+    @extend %page
+
+    overflow: hidden
+    text-align: center
+
+    @extend %page--active
+
+    &--active
+        @extend %page--active
+
+    &__wrapper
+        display: grid
+        grid-template-columns: 69.1rem 12.1rem 48.3rem
+        grid-template-rows: 42.4rem 27.6rem 1.3rem 5rem
+        margin: 19.6rem 38.3rem 11.7rem 24.3rem
+
+    &__title
+        grid-column: 1/3
+        grid-row: 1/2
+        margin-left: 7rem
+        margin-top: 3.6rem
+
+        &__line
+            display: block
+            text-align: left
+
+            &--1
+                @extend %title-120
+
+                color: $component-color
+
+            &--2
+                @extend %title-229
+
+    &__subtitles
+        grid-column: 3/4
+        grid-row: 1/2
+        line-height: 2.75
+        margin-left: 7.7rem
+        margin-top: 17.6rem
+
+        &__line
+            @extend %subtitle-24
+
+            color: $text-color-2
+            display: block
+            text-align: left
+
+            &--1
+
+            &--2
+
+            &--3
+
+    &__body
+        grid-column: 2/4
+        grid-row: 2/4
+        letter-spacing: 0.15rem
+        line-height: 1.25
+        margin-top: -1.8rem
+
+        &__line
+            @extend %title-74
+
+            display: block
+            text-align: left
+
+            &--1
+
+            &--1
+
+        &__button
+            @extend %button-42
+
+            border: 2px solid $component-color
+            color: $component-color
+            height: 8rem
+            margin-top: 4rem
+            transition: background .3s, color .3s
+            width: 60rem
+
+            &:hover
+                background: $component-color
+                color: $text-color
+
+    &__footer
+        @extend %foot-24
+
+        grid-column: 1/2
+        grid-row: 3/5
+        letter-spacing: 0.03rem
+        line-height: 4.3rem
+        margin-top: -1.1rem
+        text-align: left
+
+        &__thanks
+
+        &__social
+
+            &__link
+                margin-right: 3.4rem
+                transition: color .3s, font-style .3s
+
+                &:hover
+                    color: $component-color
+                    font-style: italic
+
+            &__line

@@ -1,0 +1,24 @@
+.error
+    @extend %page
+
+    overflow: hidden
+    text-align: center
+
+    @extend %page--active
+
+    &__wrapper
+        @extend %center
+
+        background: $bg-color
+        color: $text-color
+        flex-direction: column
+        gap: 2rem
+        text-align: center
+
+    &__number
+        @extend %title-120
+
+    &__text
+        @extend %title-74
+
+        color: $component-color
