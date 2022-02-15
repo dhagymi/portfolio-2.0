@@ -9,7 +9,8 @@ block content
             each text, index in about.data.animated_text
                 p(class=`about__animatedText about__animatedText--${index + 1}`)
                     span.about__animatedText__word.about__animatedText__word--odd=text[lang]
-            .about__cards 
+            p.about__title=about.data.title[0][lang]
+            .about__cards             
                 each card in cards 
                     div(class=`about__card about__card--${card.name.toLowerCase()}`)
                         figure.about__card__imageWrapper
@@ -17,7 +18,7 @@ block content
                         p.about__card__title=card.name
                         .about__card__text!=PrismicDOM.RichText.asHtml(card.text[lang], Link)
             .about__skills
-                h1.about__skills__title=about.data.title[0][lang]
+                h1.about__skills__title=about.data.secondary_title[0][lang]
                 each list, index in skills 
                     div(class=`about__skills__wrapper about__skills__wrapper--${index + 1}`)
                         h2.about__skills__subtitle=list.description[0][lang]

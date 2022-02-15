@@ -5,6 +5,44 @@
     width: 100vw
     z-index: z("options")
 
+    &__arrow
+        display: none
+        height: 100vh
+        pointer-events: none
+        position: absolute
+        width: 100vw
+        z-index: z("arrow")
+
+        &--visible
+            display: block
+
+        &__wrapper
+            bottom: 9.5rem
+            color: $component-color
+            left: 6.6rem
+            position: absolute
+            transition: transform .5s
+
+            @include media("<tablet")
+                bottom: 3.5rem
+                left: 3.6rem
+
+            @include media("<phone")
+                bottom: 2.5rem
+                left: 2.5rem
+
+            &--up
+                transform: rotate(-180deg)
+
+            svg
+                @include media("<tablet")
+                    height: 9rem
+                    width: 9rem
+
+                @include media("<phone")
+                    height: 5rem
+                    width: 5rem
+
 .header
     pointer-events: all
 
@@ -15,20 +53,70 @@
         top: 9.6rem
         width: 9.5rem
 
+        @include media("<tablet")
+            left: 5rem
+            top: 8rem
+
+        @include media("<phone")
+            left: 2.8rem
+            top: 3.8rem
+            width: 5.5rem
+
     &__responsiveMenuButton
+        background: $component-color
+        display: none
+        height: 4rem
         position: absolute
+        right: 4.1rem
+        top: 8.2rem
+        width: 4rem
+
+        @include media("<tablet")
+            display: block
+
+        @include media("<phone")
+            right: 2.7rem
+            top: 2.5rem
 
         &--visible
 
         &__stripe
+            background: $text-color
+            height: 0.3rem
+            position: absolute
+            right: 0.75rem
+            transition: transform .3s, top .3s, width .3s, right .3s
+            width: 2.7rem
 
             &--1
+                top: 1.3rem
 
                 &--active
+                    right: 0.2rem
+                    top: 2rem
+                    transform: rotate(50deg) skew(-45deg)
+                    width: 3.7rem
+
+                    @include media("<phone")
+                        right: 0.6rem
+                        top: 1.9rem
+                        width: 2.7rem
+                        height: 0.2rem
 
             &--2
+                top: 2.5rem
 
                 &--active
+                    right: 0.2rem
+                    top: 2rem
+                    transform: rotate(-50deg) skew(45deg)
+                    width: 3.7rem
+
+                    @include media("<phone")
+                        right: 0.7rem
+                        top: 1.9rem
+                        width: 2.7rem
+                        height: 0.2rem
 
     &__navigation
         @extend %nav-24
@@ -37,6 +125,9 @@
         position: absolute
         right: 7.5rem
         top: 10.6rem
+
+        @include media("<tablet")
+            display: none
 
         &--visible
 
@@ -68,6 +159,9 @@
 
 .footer
     pointer-events: all
+
+    @include media("<tablet")
+        display: none
 
     &__list
         @extend %nav-24

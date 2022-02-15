@@ -8,6 +8,9 @@
     width: 10px
     z-index: z("scrollBar")
 
+    @include media("<phone")
+        width: 6px
+
     &__background
         background: $component-color
         height: 100%
