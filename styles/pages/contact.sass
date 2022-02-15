@@ -14,12 +14,19 @@
         grid-template-columns: 69.1rem 12.1rem 48.3rem
         grid-template-rows: 42.4rem 27.6rem 1.3rem 5rem
         margin: 19.6rem 38.3rem 11.7rem 24.3rem
+        min-height: 100vh
 
         @include media("<tablet")
             grid-template-columns: 19.1rem 33.1rem 27.3rem
             grid-template-rows: 36rem 47rem 7rem
             margin-top: 22.8rem
             margin-left: -1.3rem
+
+        @include media("<phone")
+            grid-template-columns: 19.6em 6.1rem 11.5rem
+            grid-template-rows: 15.8rem 20.5rem 15rem
+            margin-top: 10.8rem
+            margin-left: 0
 
     &__title
         grid-column: 1/3
@@ -31,6 +38,12 @@
             line-height: 1.13
             margin-top: 3.2rem
 
+        @include media("<phone")
+            grid-column: 1/2
+            line-height: 1.4
+            margin-left: 3.2rem
+            margin-top: 2.56rem
+
         &__line
             display: block
             text-align: left
@@ -40,8 +53,14 @@
 
                 color: $component-color
 
+                @include media("<phone")
+                    font-size: 3.3rem
+
             &--2
                 @extend %title-229
+
+                @include media("<phone")
+                    font-size: 5.1rem
 
     &__subtitles
         grid-column: 3/4
@@ -55,12 +74,23 @@
             margin-left: 0.7rem
             margin-top: 15.6rem
 
+        @include media("<phone")
+            grid-column: 2/4
+            margin-left: -0.2rem
+            margin-right: 3rem
+            margin-top: -0.3rem
+
         &__line
             @extend %subtitle-24
 
             color: $text-color-2
             display: block
             text-align: left
+
+            @include media("<phone")
+                font-size: 1rem
+                letter-spacing: -0.07rem
+                text-align: right
 
             &--1
 
@@ -77,6 +107,13 @@
 
         @include media("<tablet")
             grid-row: 2/3
+
+        @include media("<phone")
+            grid-column: 1/3
+            letter-spacing: 0.05rem
+            line-height: 1.4
+            margin-left: 3.6rem
+            margin-top: -0.8rem
 
         &__line
             @extend %title-74
@@ -101,6 +138,11 @@
             @include media("<tablet")
                 margin-top: 5rem
 
+            @include media("<phone")
+                margin-top: 3.5rem
+                height: 5.8rem
+                width: 30.4rem
+
             &:hover
                 background: $component-color
                 color: $text-color
@@ -108,7 +150,7 @@
     &__footer
         @extend %foot-24
 
-        grid-column: 2/4
+        grid-column: 1/2
         grid-row: 3/4
         letter-spacing: 0.03rem
         line-height: 4.3rem
@@ -116,11 +158,25 @@
         text-align: left
 
         @include media("<tablet")
+            grid-column: 2/4
             letter-spacing: 0
+
+        @include media("<phone")
+            grid-column: 1/3
+            line-height: 1.45
+            margin-left: 3.8rem
+            margin-top: -0.4rem
 
         &__thanks
 
         &__social
+
+            @include media("<phone")
+                display: flex
+                flex-direction: column
+                height: 8rem
+                margin-top: 2.6rem
+                width: 13rem
 
             &__link
                 margin-right: 3.4rem

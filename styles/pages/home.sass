@@ -24,6 +24,9 @@
         @include media("<tablet")
             padding: 16rem 7.9rem
 
+        @include media("<phone")
+            padding: 11rem 2.9rem
+
     &__title
         @extend %title-120
 
@@ -36,31 +39,49 @@
             letter-spacing: 0
             line-height: 1.22
 
+        @include media("<phone")
+            font-size: 4rem
+
         &__line
             display: block
 
             &--1
                 margin-left: -10rem
+
+                @include media("<phone")
+                    margin-left: -5.9rem
             &--2
                 margin-left: 21rem
 
                 @include media("<tablet")
                     margin-left: 12rem
+
+                @include media("<phone")
+                    margin-left: 2.6rem
             &--3
                 margin-left: -38rem
 
                 @include media("<tablet")
                     margin-left: -27rem
+
+                @include media("<phone")
+                    margin-left: -13.8rem
             &--4
                 margin-left: 25rem
 
                 @include media("<tablet")
                     margin-left: 10rem
+
+                @include media("<phone")
+                    margin-left: 3.8rem
             &--5
                 margin-left: -20rem
 
                 @include media("<tablet")
                     margin-left: -17rem
+
+                @include media("<phone")
+                    margin-left: -8.8rem
 
     &__card
         height: 45.3rem
@@ -68,12 +89,19 @@
         position: absolute
         width: 37.5rem
 
+        @include media("<phone")
+            height: 28.3rem
+            width: 24.5rem
+
         &__caption
             @extend %name-144
 
             color: $component-color
             letter-spacing: 0.4rem
             position: absolute
+
+            @include media("<phone")
+                display: none
 
         &__image
             height: 100%
@@ -86,6 +114,10 @@
             @include media("<tablet")
                 left: -4rem
                 top: 28rem
+
+            @include media("<phone")
+                left: -7.1rem
+                top: 11.5rem
 
             figcaption
                 bottom: 3.3rem
@@ -101,6 +133,10 @@
 
             @include media("<tablet")
                 bottom: 12rem
+
+            @include media("<phone")
+                bottom: -4.2rem
+                right: -2.6rem
 
             figcaption
                 top: 16rem
@@ -124,6 +160,9 @@
                 @include media("<tablet")
                     letter-spacing: 0.9rem
 
+                @include media("<phone")
+                    letter-spacing: 0.4rem
+
             &--2
                 letter-spacing: 1.3rem
                 line-height: 1.05
@@ -133,6 +172,11 @@
                     letter-spacing: 1.1rem
                     line-height: 0.95
                     margin-left: 7.1rem
+
+                @include media("<phone")
+                    letter-spacing: .55rem
+                    line-height: 1.44
+                    margin-left: 3.2rem
 
     &__text
         @extend %text-24
@@ -149,13 +193,22 @@
             margin-top: 6.2rem
             padding-left: 0
 
+        @include media("<phone")
+            gap: 4.8rem
+            flex-direction: column
+            margin-top: 4rem
+
         &__column
-            width: 50rem
             letter-spacing: 0.11rem
             line-height: 4.55rem
+            width: 50rem
 
             @include media("<tablet")
                 letter-spacing: 0.09rem
+
+            @include media("<phone")
+                line-height: 4.25rem
+                width: 31rem
 
             strong
                 font-weight: bold

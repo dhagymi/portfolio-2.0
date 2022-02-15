@@ -23,6 +23,11 @@
             left: 19.5rem
             top: 55.5rem
 
+        @include media("<phone")
+            left: 10.5rem
+            letter-spacing: 0.5rem
+            top: 31rem
+
     &__cardsWrapper
         align-items: center
         display: grid
@@ -39,6 +44,10 @@
             gap: 2rem
             padding: 2rem
 
+        @include media("<phone")
+            gap: 1rem
+            padding: 1rem
+
     &__card
 
         &--1
@@ -50,6 +59,10 @@
             @include media("<tablet")
                 height: 37rem
                 width: 35rem
+
+            @include media("<phone")
+                height: 22rem
+                width: 15rem
 
         &__link
             display: inline-block
