@@ -15,20 +15,49 @@
         top: 9.6rem
         width: 9.5rem
 
+        @include media("<tablet")
+            left: 5rem
+            top: 8rem
+
     &__responsiveMenuButton
+        background: $component-color
+        display: none
+        height: 4rem
         position: absolute
+        right: 4.1rem
+        top: 8.2rem
+        width: 4rem
+
+        @include media("<tablet")
+            display: block
 
         &--visible
 
         &__stripe
+            background: $text-color
+            height: 0.3rem
+            position: absolute
+            right: 0.75rem
+            transition: transform .3s, top .3s, width .3s, right .3s
+            width: 2.7rem
 
             &--1
+                top: 1.3rem
 
                 &--active
+                    right: 0.2rem
+                    top: 2rem
+                    transform: rotate(50deg) skew(-45deg)
+                    width: 3.7rem
 
             &--2
+                top: 2.5rem
 
                 &--active
+                    right: 0.2rem
+                    top: 2rem
+                    transform: rotate(-50deg) skew(45deg)
+                    width: 3.7rem
 
     &__navigation
         @extend %nav-24
@@ -37,6 +66,9 @@
         position: absolute
         right: 7.5rem
         top: 10.6rem
+
+        @include media("<tablet")
+            display: none
 
         &--visible
 
@@ -68,6 +100,9 @@
 
 .footer
     pointer-events: all
+
+    @include media("<tablet")
+        display: none
 
     &__list
         @extend %nav-24

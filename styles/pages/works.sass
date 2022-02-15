@@ -19,19 +19,37 @@
         position: absolute
         top: 40.5rem
 
+        @include media("<tablet")
+            left: 19.5rem
+            top: 55.5rem
+
     &__cardsWrapper
-        position: absolute
+        align-items: center
+        display: grid
+        gap: 7rem
+        grid-template-columns: repeat(2, 1fr)
+        grid-template-rows: auto
         height: 100vh
+        justify-items: center
+        padding: 19rem
+        position: absolute
         width: 100vw
+
+        @include media("<tablet")
+            gap: 2rem
+            padding: 2rem
 
     &__card
 
         &--1
-            left: 18rem
+            grid-column: 1/2
+            grid-row: 1/2
             height: 45rem
-            position: absolute
-            top: 21rem
             width: 40rem
+
+            @include media("<tablet")
+                height: 37rem
+                width: 35rem
 
         &__link
             display: inline-block

@@ -15,11 +15,21 @@
         grid-template-rows: 42.4rem 27.6rem 1.3rem 5rem
         margin: 19.6rem 38.3rem 11.7rem 24.3rem
 
+        @include media("<tablet")
+            grid-template-columns: 19.1rem 33.1rem 27.3rem
+            grid-template-rows: 36rem 47rem 7rem
+            margin-top: 22.8rem
+            margin-left: -1.3rem
+
     &__title
         grid-column: 1/3
         grid-row: 1/2
         margin-left: 7rem
         margin-top: 3.6rem
+
+        @include media("<tablet")
+            line-height: 1.13
+            margin-top: 3.2rem
 
         &__line
             display: block
@@ -39,6 +49,11 @@
         line-height: 2.75
         margin-left: 7.7rem
         margin-top: 17.6rem
+
+        @include media("<tablet")
+            line-height: 2.45
+            margin-left: 0.7rem
+            margin-top: 15.6rem
 
         &__line
             @extend %subtitle-24
@@ -60,6 +75,9 @@
         line-height: 1.25
         margin-top: -1.8rem
 
+        @include media("<tablet")
+            grid-row: 2/3
+
         &__line
             @extend %title-74
 
@@ -80,6 +98,9 @@
             transition: background .3s, color .3s
             width: 60rem
 
+            @include media("<tablet")
+                margin-top: 5rem
+
             &:hover
                 background: $component-color
                 color: $text-color
@@ -87,12 +108,15 @@
     &__footer
         @extend %foot-24
 
-        grid-column: 1/2
-        grid-row: 3/5
+        grid-column: 2/4
+        grid-row: 3/4
         letter-spacing: 0.03rem
         line-height: 4.3rem
         margin-top: -1.1rem
         text-align: left
+
+        @include media("<tablet")
+            letter-spacing: 0
 
         &__thanks
 
