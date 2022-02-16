@@ -6,10 +6,10 @@ block variables
 block content
     .works
         section.works__wrapper
-            h1.works__title=works.data.title[0][lang]
+            h1.works__title(data-animation="fade")=works.data.title[0][lang]
             .works__cardsWrapper
                 each work, index in works.data.items 
                     div(class=`works__card works__card--${index + 1}`)
                         a.works__card__link(href=work.link.url target=work.link.target)
                             h2.works__card__title=work.title
-                            img.works__card__image(src=work.image.url alt=work.image.alt)
+                            img.works__card__image(data-src=work.image.url alt=work.image.alt)

@@ -92,18 +92,28 @@
                 right: -0.4rem
                 top: 8.5rem
 
+            &__cross
+                top: 0rem
+                position: absolute
+                width: 4rem
+                height: 4rem
+                right: -8rem
+
+                @include media("<phone")
+                    right: -7.2rem
+                    top: -0.7rem
+
             &__stripe
                 background: $text-color
                 height: 0.3rem
                 position: absolute
-                right: -7.7rem
-                top: 2.3rem
+                top: 2.1rem
                 width: 3.7rem
 
                 @include media("<phone")
                     height: 0.2rem
-                    right: -5.7rem
-                    top: 1.3rem
+                    right: 0.6rem
+                    top: 1.9rem
                     width: 2.8rem
 
                 &--1
@@ -150,6 +160,11 @@
                     width: 105%
 
                 &:hover
+
+                    &:after
+                        opacity: 1
+
+                &--active
 
                     &:after
                         opacity: 1

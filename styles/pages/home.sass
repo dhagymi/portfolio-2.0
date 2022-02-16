@@ -4,8 +4,6 @@
     overflow: hidden
     text-align: center
 
-    @extend %page--active
-
     &--active
         @extend %page--active
 
@@ -44,6 +42,7 @@
 
         &__line
             display: block
+            pointer-events: all
 
             &--1
                 margin-left: -10rem

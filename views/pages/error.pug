@@ -6,5 +6,5 @@ block variables
 block content
     .error
         section.error__wrapper
-            p.error__number=error.data.error_code
-            p.error__text=error.data.message[0][lang]
+            p.error__number(data-animation="fade")=error.data.error_code
+            p.error__text(data-animation="fade")=error.data.message[0][lang]

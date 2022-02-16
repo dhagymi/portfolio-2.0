@@ -9,8 +9,9 @@ nav.menu
                         span.menu__header__languages__label=lang.abbreviation
 
         button(class=`menu__header__close ${isDesktop ? "" : "menu__header__close--active"}`)
-            .menu__header__close__stripe.menu__header__close__stripe--1
-            .menu__header__close__stripe.menu__header__close__stripe--2
+            .menu__header__close__cross
+                .menu__header__close__stripe.menu__header__close__stripe--1
+                .menu__header__close__stripe.menu__header__close__stripe--2
             span.menu__header__close__label=header.data.close_text[0][lang]
     
     nav.menu__navigation

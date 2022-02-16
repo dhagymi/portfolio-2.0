@@ -4,8 +4,6 @@
     overflow: hidden
     text-align: center
 
-    @extend %page--active
-
     &--active
         @extend %page--active
 
@@ -14,11 +12,22 @@
     &__animatedText
         @extend %stripes-30
 
+        display: flex
+        left: 0
+        opacity: 0
         position: absolute
-        transition: transform 1s
+        top: 0
 
         @include media("<tablet")
             display: none
+
+        &__container
+            height: 100vh
+            left: 0
+            opacity: 0
+            position: absolute
+            top: 0
+            width: 100vw
 
         &--1
             transform: translateX(calc(50vw - 50% - 2rem)) translateY(calc(50vh - 50%)) rotate(-90deg)
@@ -27,6 +36,7 @@
             transform: translateX(calc(50vw - 50% + 2rem)) translateY(calc(50vh - 50%)) rotate(-90deg)
 
         &__word
+            text-indent: 2rem
 
             &--odd
 
