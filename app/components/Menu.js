@@ -48,10 +48,6 @@ export default class Menu extends Component {
 		each(this.generalComponents.stripes, (stripe) => {
 			stripe.style[this.transitionPrefix] = `all 0.2s ease-out`;
 		});
-
-		alert(
-			`${window.screen.availHeight}\n${window.innerHeight}\n${window.outerHeight}`
-		);
 	}
 
 	desactivate() {
