@@ -37,7 +37,7 @@ export default class Arrow extends Component {
 
 		this.hide();
 
-		this.viewportHeight = window.screen.availHeight;
+		this.viewportHeight = window.innerHeight;
 		this.element.style.height = `${this.viewportHeight}px`;
 
 		if (
