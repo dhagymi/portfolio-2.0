@@ -208,6 +208,7 @@ export default class Page {
 		if (this.elements.wrapper) {
 			this.scroll.limit =
 				this.elements.wrapper.clientHeight - window.innerHeight;
+			this.scroll.target = 0;
 		}
 	}
 

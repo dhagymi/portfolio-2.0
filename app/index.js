@@ -10,6 +10,7 @@ import Cursor from "components/Cursor.js";
 import Preloader from "components/Preloader.js";
 import Options from "components/Options.js";
 import Menu from "components/Menu.js";
+import Arrow from "components/Arrow.js";
 import ScrollBar from "components/ScrollBar.js";
 
 class App {
@@ -20,6 +21,7 @@ class App {
 		this.createPreloader();
 		this.createMenu();
 		this.createOptions();
+		this.createArrow();
 		this.createPages();
 		this.createScrollBar();
 		this.createTitle();
@@ -66,6 +68,11 @@ class App {
 			interactionComponents: { menu: this.menu },
 		});
 		this.options.create();
+	}
+
+	createArrow() {
+		this.arrow = new Arrow({ template: this.template });
+		this.arrow.create();
 	}
 
 	createContent() {
@@ -122,7 +129,14 @@ class App {
 
 		const { href: url } = link;
 		const location = url.split("/")[url.split("/").length - 1];
-		if (url.includes(window.location.origin)) {
+		const language = window.location.pathname.split("/")[1];
+
+		if (
+			url.includes(window.location.origin) &&
+			(!(link.children[0].dataset?.language || link.dataset?.language) ||
+				language === link.children[0].dataset.language ||
+				language === link.dataset?.language)
+		) {
 			event.preventDefault();
 		}
 
@@ -150,6 +164,10 @@ class App {
 			this.scrollBar.update(this.page.showed || false);
 		}
 
+		if (this.arrow && this.arrow.update) {
+			this.arrow.update(this.page.showed || false, this.page.scroll);
+		}
+
 		if (this.cursor && this.cursor.update) {
 			this.cursor.update(true);
 		}
@@ -165,6 +183,10 @@ class App {
 	/* Events */
 	async onChange({ url, push = true }) {
 		this.removeLinkListeners();
+
+		this.arrow.hide();
+		this.menu.desactivate();
+		this.options.desactivate();
 		this.page.hide();
 
 		const request = await fetch(url);
@@ -194,6 +216,8 @@ class App {
 
 			this.onResize();
 
+			this.scrollBar.onChange();
+
 			this.page.show();
 
 			this.addLinkListeners();
@@ -222,6 +246,9 @@ class App {
 			}
 			if (this.scrollBar?.onResize) {
 				this.scrollBar.onResize(this.page.elements.wrapper);
+			}
+			if (this.arrow?.onResize) {
+				this.arrow.onResize(this.page.elements.wrapper);
 			}
 		}
 	}

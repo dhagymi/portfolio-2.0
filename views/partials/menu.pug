@@ -1,3 +1,6 @@
+.menu__curtain.menu__curtain--back
+.menu__curtain.menu__curtain--front
+
 nav.menu
     .menu__header
         a.menu__header__logo(href=Link(lang, header.data.logo_link))!=meta.data.title[0][lang]+header.data.logo_svg
@@ -19,11 +22,10 @@ nav.menu
             each item in navigation
                 li.menu__navigation__list__item
                     a.menu__navigation__list__link(href=Link(lang, item.link))
-                        span.menu__navigation__list__label=item.label[0][lang]
+                        span.menu__navigation__list__label(data-section=item.label[0].en.toLowerCase())=item.label[0][lang]
     
     .menu__social 
         ul.menu__social__list
             each item in social
                 li.menu__social__list__item
                     a.menu__social__list__link(href=item.link.url target=item.link.target)!=item.svg
-    

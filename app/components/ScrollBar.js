@@ -180,6 +180,16 @@ export default class ScrollBar extends Component {
 		this.globalUpdateScroll({
 			target: this.yBar.realProportion,
 		});
+
+		if (this.yBar.difference !== 0) {
+			if (this.timer) {
+				clearTimeout(this.timer);
+			}
+			this.show();
+			this.timer = setTimeout(() => {
+				this.hide();
+			}, 1500);
+		}
 	}
 
 	onTouchBarEnd(event) {
@@ -205,6 +215,12 @@ export default class ScrollBar extends Component {
 		super.onResize(wrapper);
 		this.barHeight = (window.innerHeight * 100) / wrapper.clientHeight;
 		this.elements.bar.style.height = `${this.barHeight}%`;
+	}
+
+	onChange() {
+		this.percent = 0;
+		this.scroll.current = 0;
+		this.scroll.target = 0;
 	}
 
 	/* Listeners */

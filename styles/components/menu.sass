@@ -2,9 +2,9 @@
     background: $component-color
     display: flex
     flex-direction: column
-    left: 0
     height: 100vh
     justify-content: center
+    left: 0
     position: fixed
     top: 0
     visibility: hidden
@@ -15,6 +15,26 @@
 
         @include media("<tablet")
             visibility: visible
+
+    &__curtain
+        background: $component-color
+        border-bottom-left-radius: 200%
+        height: 100vh
+        left: 0
+        position: fixed
+        top: 0
+        transform: translateX(100%) translateY(-100%)
+        width: 100vw
+        z-index: z("menu")
+
+        &--back
+            opacity: .6
+
+        &--front
+
+        &--active
+            border-radius: 0
+            transform: translateX(0) translateY(0)
 
     &__header
         height: 34rem
@@ -68,6 +88,10 @@
                     width: 3.5rem
 
                 &:hover
+                    background: $text-color
+                    color: $component-color
+
+                &--active
                     background: $text-color
                     color: $component-color
 
@@ -156,7 +180,7 @@
                     position: absolute
                     top: 50%
                     transform: translateX(-50%)
-                    transition: opacity .3s
+                    transition: opacity .5s
                     width: 105%
 
                 &:hover

@@ -6,15 +6,12 @@
     z-index: z("options")
 
     &__arrow
-        display: none
         height: 100vh
+        opacity: 0
         pointer-events: none
         position: absolute
         width: 100vw
         z-index: z("arrow")
-
-        &--visible
-            display: block
 
         &__wrapper
             bottom: 9.5rem
@@ -35,6 +32,9 @@
                 transform: rotate(-180deg)
 
             svg
+                height: 13.8rem
+                width: 13.8rem
+
                 @include media("<tablet")
                     height: 9rem
                     width: 9rem
@@ -149,7 +149,7 @@
                     position: absolute
                     top: 50%
                     transform: translateX(-50%)
-                    transition: opacity .3s
+                    transition: opacity .5s
                     width: 110%
 
                 &:hover
@@ -192,10 +192,15 @@
                 position: absolute
                 top: 50%
                 transform: translateX(-50%)
-                transition: opacity .3s
+                transition: opacity .5s
                 width: 110%
 
             &:hover
+
+                &:after
+                    opacity: 1
+
+            &--active
 
                 &:after
                     opacity: 1

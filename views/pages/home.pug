@@ -12,10 +12,10 @@ block content
                         span(class=`home__title__line home__title__line--${index + 1}` data-animation="fade")=title[lang]
                 figure.home__card.home__card--mica
                     img.home__card__image(data-src=home.data.mica_card[0].image.url alt=home.data.mica_card[0].image.alt data-animation="fade")
-                    figcaption.home__card__caption(data-animation="fade")!=home.data.mica_card[0].name
+                    figcaption.home__card__caption(data-animation="fade")!=home.data.mica_card[0].name+"Mica"
                 figure.home__card.home__card--agus
                     img.home__card__image(data-src=home.data.agus_card[0].image.url alt=home.data.agus_card[0].image.alt data-animation="fade")
-                    figcaption.home__card__caption(data-animation="fade")!=home.data.agus_card[0].name
+                    figcaption.home__card__caption(data-animation="fade")!=home.data.agus_card[0].name+"Agus"
 
             .home__secondaryWrapper
                 h2.home__subtitle

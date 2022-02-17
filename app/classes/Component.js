@@ -2,6 +2,7 @@ import EventEmitter from "events";
 import normalizeWheel from "normalize-wheel";
 import prefix from "prefix";
 import { map, each } from "lodash";
+import GSAP from "gsap";
 
 import Fade from "animations/Fade.js";
 
@@ -88,6 +89,7 @@ export default class Component extends EventEmitter {
 		this.addEventListeners();
 	}
 
+	/* Animations */
 	createAnimations() {
 		this.animationsFades = map(this.elements.animationsFades, (element) => {
 			if (
@@ -97,6 +99,20 @@ export default class Component extends EventEmitter {
 				Array.isArray(element)
 			)
 				return new Fade({ element });
+		});
+	}
+
+	show() {
+		return new Promise((resolve) => {
+			this.timeline = GSAP.timeline();
+			this.timeline.to(this.element, { autoAlpha: 1, onComplete: resolve });
+		});
+	}
+
+	hide() {
+		return new Promise((resolve) => {
+			this.timeline = GSAP.timeline();
+			this.timeline.to(this.element, { autoAlpha: 0, onComplete: resolve });
 		});
 	}
 

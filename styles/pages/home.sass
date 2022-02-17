@@ -83,10 +83,14 @@
                     margin-left: -8.8rem
 
     &__card
-        height: 45.3rem
+        height: 71.3rem
         opacity: 0
         position: absolute
-        width: 37.5rem
+        width: 54.5rem
+
+        @include media("<tablet")
+            height: 48.3rem
+            width: 37.5rem
 
         @include media("<phone")
             height: 28.3rem
@@ -96,7 +100,7 @@
             @extend %name-144
 
             color: $component-color
-            letter-spacing: 0.4rem
+            font-size: 0
             position: absolute
 
             @include media("<phone")
@@ -126,6 +130,10 @@
                     bottom: -4rem
                     right: 6rem
 
+                svg
+                    height: 11.3rem
+                    width: 23.7rem
+
         &--agus
             right: 0
             bottom: 0
@@ -144,6 +152,10 @@
                 @include media("<tablet")
                     top: 2rem
                     left: 12rem
+
+                svg
+                    height: 14.1rem
+                    width: 21.2rem
 
     &__subtitle
         @extend %title-120

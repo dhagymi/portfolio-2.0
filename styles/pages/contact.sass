@@ -7,24 +7,25 @@
     &--active
         @extend %page--active
 
-    &__wrapper
+    &__container
         display: grid
         grid-template-columns: 69.1rem 12.1rem 48.3rem
         grid-template-rows: 42.4rem 27.6rem 1.3rem 5rem
-        margin: 19.6rem 38.3rem 11.7rem 24.3rem
+        margin: 0 38.3rem 0 24.3rem
+        padding: 19.6rem 0 11.7rem 0
         min-height: 100vh
 
         @include media("<tablet")
             grid-template-columns: 19.1rem 33.1rem 27.3rem
             grid-template-rows: 36rem 47rem 7rem
-            margin-top: 22.8rem
             margin-left: -1.3rem
+            padding-top: 22.8rem
 
         @include media("<phone")
             grid-template-columns: 19.6em 6.1rem 11.5rem
             grid-template-rows: 15.8rem 20.5rem 15rem
-            margin-top: 10.8rem
             margin-left: 0
+            padding-top: 10.8rem
 
     &__title
         grid-column: 1/3
