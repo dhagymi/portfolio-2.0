@@ -46,8 +46,12 @@ export default class Menu extends Component {
 		}s, border-radius linear 0.${Math.round(this.animationDurationMS * 1.33)}s`;
 
 		each(this.generalComponents.stripes, (stripe) => {
-			stripe.style[this.transitionPrefix] = `all linear 0.2s`;
+			stripe.style[this.transitionPrefix] = `all 0.2s ease-out`;
 		});
+
+		alert(
+			`${window.screen.availHeight}\n${window.innerHeight}\n${window.outerHeight}`
+		);
 	}
 
 	desactivate() {
@@ -84,6 +88,10 @@ export default class Menu extends Component {
 				stripe.classList.add(
 					`header__responsiveMenuButton__stripe--${index + 1}--active`
 				);
+
+				stripe.style[this.transitionDelayPrefix] = `.${
+					this.animationDurationMS - 200
+				}s`;
 			});
 
 			this.showCurtains();
@@ -109,7 +117,9 @@ export default class Menu extends Component {
 						stripe.classList.remove(
 							`header__responsiveMenuButton__stripe--${index + 1}--active`
 						);
+						stripe.style[this.transitionDelayPrefix] = `0s`;
 					});
+
 					this.hideCurtains();
 					resolve();
 				},
