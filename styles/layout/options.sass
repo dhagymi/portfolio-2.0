@@ -5,6 +5,9 @@
     width: 100vw
     z-index: z("options")
 
+    @include media("<tablet")
+        z-index: z("transition")
+
     &__arrow
         height: 100vh
         opacity: 0
@@ -75,8 +78,8 @@
             display: block
 
         @include media("<phone")
-            right: 2.7rem
-            top: 2.5rem
+            right: 2.4rem
+            top: 3rem
 
         &--visible
 
@@ -92,7 +95,7 @@
                 top: 1.3rem
 
                 &--active
-                    right: 0.2rem
+                    right: 0.1rem
                     top: 2rem
                     transform: rotate(50deg) skew(-45deg)
                     width: 3.7rem

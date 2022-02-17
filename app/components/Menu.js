@@ -14,13 +14,15 @@ export default class Menu extends Component {
 				closeButton: ".menu__header__close",
 				navLinks: ".menu__navigation__list__label",
 			},
-			generalComponents: { curtains: ".menu__curtain" },
+			generalComponents: {
+				curtain: ".menu__curtain",
+				stripes: ".header__responsiveMenuButton__stripe",
+			},
 		});
 
 		this.transformPrefix = prefix("transform");
 		this.transitionPrefix = prefix("transition");
 		this.transitionDelayPrefix = prefix("transition-delay");
-		this.delayAnimationMS = 100;
 		this.animationDurationMS = 600;
 
 		this.pageTemplate = template;
@@ -37,21 +39,14 @@ export default class Menu extends Component {
 
 		this.activateLanguage();
 
-		each(this.generalComponents.curtains, (curtain) => {
-			console.log(
-				`${this.transformPrefix} cubic-bezier(0.77, 0, 0.175, 1) 0.${
-					this.animationDurationMS
-				}s, border-radius linear 0.${Math.round(
-					this.animationDurationMS * 1.33
-				)}s`
-			);
-			curtain.style[this.transitionPrefix] = `${
-				this.transformPrefix
-			} cubic-bezier(0.77, 0, 0.175, 1) 0.${
-				this.animationDurationMS
-			}s, border-radius linear 0.${Math.round(
-				this.animationDurationMS * 1.33
-			)}s`;
+		this.generalComponents.curtain.style[this.transitionPrefix] = `${
+			this.transformPrefix
+		} cubic-bezier(0.77, 0, 0.175, 1) 0.${
+			this.animationDurationMS
+		}s, border-radius linear 0.${Math.round(this.animationDurationMS * 1.33)}s`;
+
+		each(this.generalComponents.stripes, (stripe) => {
+			stripe.style[this.transitionPrefix] = `all linear 0.2s`;
 		});
 	}
 
@@ -85,13 +80,19 @@ export default class Menu extends Component {
 	/* Animations */
 	show() {
 		return new Promise((resolve) => {
+			each(this.generalComponents.stripes, (stripe, index) => {
+				stripe.classList.add(
+					`header__responsiveMenuButton__stripe--${index + 1}--active`
+				);
+			});
+
 			this.showCurtains();
 
 			this.timeline = GSAP.timeline();
 			this.timeline.to(
 				this.element,
 				{ autoAlpha: 1, onComplete: resolve },
-				`+=0.${this.animationDurationMS + this.delayAnimationMS}`
+				`+=0.${this.animationDurationMS}`
 			);
 
 			this.isVisible = true;
@@ -104,6 +105,11 @@ export default class Menu extends Component {
 			this.timeline.to(this.element, {
 				autoAlpha: 0,
 				onComplete: () => {
+					each(this.generalComponents.stripes, (stripe, index) => {
+						stripe.classList.remove(
+							`header__responsiveMenuButton__stripe--${index + 1}--active`
+						);
+					});
 					this.hideCurtains();
 					resolve();
 				},
@@ -114,39 +120,11 @@ export default class Menu extends Component {
 	}
 
 	showCurtains() {
-		each(this.generalComponents.curtains, (curtain) => {
-			curtain.classList.add("menu__curtain--active");
-
-			setTimeout(() => {
-				if (curtain.classList.contains("menu__curtain--front")) {
-					curtain.style[this.transitionDelayPrefix] = "0s";
-				}
-
-				if (curtain.classList.contains("menu__curtain--back")) {
-					curtain.style[this.transitionDelayPrefix] = `.${
-						this.delayAnimationMS / 100
-					}s`;
-				}
-			}, this.animationDurationMS + this.delayAnimationMS);
-		});
+		this.generalComponents.curtain.classList.add("menu__curtain--active");
 	}
 
 	hideCurtains() {
-		each(this.generalComponents.curtains, (curtain) => {
-			curtain.classList.remove("menu__curtain--active");
-
-			setTimeout(() => {
-				if (curtain.classList.contains("menu__curtain--front")) {
-					curtain.style[this.transitionDelayPrefix] = `.${
-						this.delayAnimationMS / 100
-					}s`;
-				}
-
-				if (curtain.classList.contains("menu__curtain--back")) {
-					curtain.style[this.transitionDelayPrefix] = "0s";
-				}
-			}, this.animationDurationMS + this.delayAnimationMS);
-		});
+		this.generalComponents.curtain.classList.remove("menu__curtain--active");
 	}
 
 	/* Events */
