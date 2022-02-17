@@ -37,6 +37,9 @@ export default class Arrow extends Component {
 
 		this.hide();
 
+		this.viewportHeight = window.screen.availHeight;
+		this.element.style.height = `${this.viewportHeight}px`;
+
 		if (
 			!this.elements.wrapper.classList.contains(
 				"options__arrow__wrapper--up"
