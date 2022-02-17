@@ -146,6 +146,10 @@
                 display: inline-block
                 position: relative
                 top: 0.2rem
+                width: 10.5rem
+
+                @include media("<phone")
+                    width: 6.7rem
 
     &__navigation
         @extend %menu-90
