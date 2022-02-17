@@ -4,7 +4,7 @@ import prefix from "prefix";
 
 import Page from "classes/Page.js";
 
-import { clamp, lerp } from "utils/math.js";
+import { clamp } from "utils/math.js";
 
 export default class About extends Page {
 	constructor() {
@@ -176,8 +176,10 @@ export default class About extends Page {
 		this.designerDeltaY += this.velocity * this.directionMultiplier;
 
 		if (
-			this.developerDeltaY >= 2 * this.developerSeedSpan.width ||
-			this.developerDeltaY <= -2 * this.developerSeedSpan.width
+			this.developerDeltaY >=
+				2 * this.developerSeedSpan.element.getBoundingClientRect().height ||
+			this.developerDeltaY <=
+				-2 * this.developerSeedSpan.element.getBoundingClientRect().height
 		) {
 			this.developerPosition = 0;
 			this.developerDeltaY = 0;
@@ -186,8 +188,10 @@ export default class About extends Page {
 		}
 
 		if (
-			this.designerDeltaY >= 2 * this.designerSeedSpan.width ||
-			this.designerDeltaY <= -2 * this.designerSeedSpan.width
+			this.designerDeltaY >=
+				2 * this.designerSeedSpan.element.getBoundingClientRect().height ||
+			this.designerDeltaY <=
+				-2 * this.designerSeedSpan.element.getBoundingClientRect().height
 		) {
 			this.designerPosition = 0;
 			this.designerDeltaY = 0;
