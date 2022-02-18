@@ -67,7 +67,12 @@ export default class Magnetic extends Animation {
 		GSAP.to([this.x.parent, this.y.parent], {
 			current: 0,
 			duration: 0.2,
-			onComplete: (_) => window.cancelAnimationFrame(this.frame),
+			onComplete: (_) => {
+				GSAP.set(this.element, {
+					zIndex: 3,
+				});
+				window.cancelAnimationFrame(this.frame);
+			},
 			target: 0,
 		});
 	}
