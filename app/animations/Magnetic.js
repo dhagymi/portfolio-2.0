@@ -135,6 +135,7 @@ export default class Magnetic extends Animation {
 		GSAP.set(this.element, {
 			x: this.x.parent.current,
 			y: this.y.parent.current,
+			zIndex: 4,
 		});
 
 		this.frame = window.requestAnimationFrame(this.updatePosition.bind(this));
