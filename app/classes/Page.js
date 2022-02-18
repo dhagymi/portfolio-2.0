@@ -4,6 +4,7 @@ import prefix from "prefix";
 import { each, map } from "lodash";
 
 import Fade from "animations/Fade.js";
+import Magnetic from "animations/Magnetic.js";
 
 import Scroll from "classes/Scroll.js";
 import AsyncLoad from "classes/AsyncLoad.js";
@@ -14,7 +15,8 @@ export default class Page {
 		this.selectorChildren = {
 			...elements,
 
-			animationsFades: '[data-animation="fade"]',
+			animationsFades: '[data-animationfade="true"]',
+			animationsMagnetic: '[data-animationmagnetic="true"]',
 
 			preloaders: "[data-src]",
 		};
@@ -66,16 +68,29 @@ export default class Page {
 	}
 
 	createAnimations() {
-		if (
-			this.elements.animationsFades.length > 1 ||
-			this.elements.animationsFades.length === 0
-		) {
+		if (this.elements.animationsFades?.length > 1) {
 			this.animationsFades = map(this.elements.animationsFades, (element) => {
 				return new Fade({ element });
 			});
-		} else {
+		} else if (this.elements.animationsFades) {
 			this.animationsFades = [
 				new Fade({ element: this.elements.animationsFades }),
+			];
+		}
+
+		if (this.elements.animationsMagnetic?.length > 1) {
+			this.animationsMagnetic = map(
+				this.elements.animationsMagnetic,
+				(element) => {
+					return new Magnetic({ element, elements: { text: "span" } });
+				}
+			);
+		} else if (this.elements.animationsMagnetic) {
+			this.animationsMagnetic = [
+				new Magnetic({
+					element: this.elements.animationsMagnetic,
+					elements: { text: "span" },
+				}),
 			];
 		}
 	}

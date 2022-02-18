@@ -6,7 +6,7 @@ block variables
 block content
     .works
         section.works__wrapper
-            h1.works__title(data-animation="fade")=works.data.title[0][lang]
+            h1.works__title(data-animationfade="true")=works.data.title[0][lang]
             .works__cardsWrapper
                 each work, index in works.data.items 
                     div(class=`works__card works__card--${index + 1}`)

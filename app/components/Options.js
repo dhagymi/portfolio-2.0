@@ -7,8 +7,7 @@ export default class Options extends Component {
 		super({
 			element: ".options",
 			elements: {
-				header: ".header",
-				footer: ".footer",
+				logo: ".header__logo",
 				navLabel: ".header__navigation__list__label",
 				languageLabel: ".footer__list__label",
 				languageLink: ".footer__list__link",
@@ -22,6 +21,7 @@ export default class Options extends Component {
 		this.interactionComponents = interactionComponents;
 
 		this.onMenuClickEvent = this.onMenuClick.bind(this);
+		this.onLogoClickEvent = this.onLogoClick.bind(this);
 	}
 
 	create() {
@@ -71,6 +71,10 @@ export default class Options extends Component {
 		}
 	}
 
+	onLogoClick() {
+		this.interactionComponents.menu.hide();
+	}
+
 	onChange(template) {
 		this.pageTemplate = template;
 
@@ -86,5 +90,6 @@ export default class Options extends Component {
 	addEventListeners() {
 		super.addEventListeners();
 		this.elements.menuButton.addEventListener("click", this.onMenuClickEvent);
+		this.elements.logo.addEventListener("click", this.onLogoClickEvent);
 	}
 }
