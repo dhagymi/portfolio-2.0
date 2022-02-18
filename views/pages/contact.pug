@@ -16,8 +16,9 @@ block content
                 .contact__body
                     each line, index in contact.data.secondary_titles 
                         span(class=`contact__body__line contact__body__line--${index + 1}` data-animationfade="true")=line[lang]
-                    button.contact__body__button(data-animationfade="true" data-animationmagnetic="true")
-                        span=contact.data.button_text[0][lang]
+                    a.contact__body__link(href=contact.data.mail_link)
+                        button.contact__body__button(data-animationfade="true" data-animationmagnetic="true")
+                            span=contact.data.button_text[0][lang]
                 .contact__footer
                     p.contact__footer__thanks(data-animationfade="true")=contact.data.thanks[0][lang]
                     p.contact__footer__social
