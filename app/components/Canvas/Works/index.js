@@ -45,10 +45,6 @@ export default class {
 
 		this.createGeometry();
 		this.createGallery();
-
-		this.onResize({
-			sizes: this.sizes,
-		});
 	}
 
 	createGeometry() {
@@ -84,8 +80,6 @@ export default class {
 	}
 
 	hide() {
-		this.group.setParent(null);
-
 		map(this.medias, (media) => media.hide());
 	}
 

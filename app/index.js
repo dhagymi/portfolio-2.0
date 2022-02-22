@@ -208,6 +208,7 @@ class App {
 		this.arrow.hide();
 		this.menu.desactivate();
 		this.options.desactivate();
+		this.canvas.onChangeStart();
 		this.page.hide();
 
 		const request = await fetch(url);
@@ -275,12 +276,12 @@ class App {
 			if (this.arrow?.onResize) {
 				this.arrow.onResize(this.page.elements.wrapper);
 			}
+			window.requestAnimationFrame((_) => {
+				if (this.canvas && this.canvas.onResize) {
+					this.canvas.onResize();
+				}
+			});
 		}
-		window.requestAnimationFrame((_) => {
-			if (this.canvas && this.canvas.onResize) {
-				this.canvas.onResize();
-			}
-		});
 	}
 
 	/* Listeners */

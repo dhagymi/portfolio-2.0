@@ -23,12 +23,12 @@ export default class Canvas {
 		this.createCamera();
 		this.createScene();
 
-		this.onResize();
-
 		this.onTouchDownEvent = this.onTouchDown.bind(this);
 		this.onTouchMoveEvent = this.onTouchMove.bind(this);
 		this.onTouchUpEvent = this.onTouchUp.bind(this);
 		this.onWheelEvent = this.onWheel.bind(this);
+
+		this.onResize();
 
 		this.addEventListeners();
 	}
@@ -64,6 +64,13 @@ export default class Canvas {
 		});
 	}
 
+	destroyWorks() {
+		if (!this.works) return;
+
+		this.works.destroy();
+		this.works = null;
+	}
+
 	/**
 	 * Events.
 	 */
@@ -77,13 +84,17 @@ export default class Canvas {
 
 	onChange(template, isPreloaded) {
 		if (template === "works") {
-			if (!this.works) this.createWorks();
+			this.createWorks();
 			this.works.show(isPreloaded);
 		} else if (this.works) {
-			this.works.hide();
+			this.destroyWorks();
 		}
 
 		this.template = template;
+	}
+
+	onChangeStart() {
+		if (this.works && this.works.hide) this.works.hide();
 	}
 
 	onResize() {

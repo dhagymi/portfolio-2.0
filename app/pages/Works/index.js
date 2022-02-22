@@ -37,7 +37,9 @@ export default class Works extends Page {
 			);
 
 			card.style.width = `${100 - Math.random() * 40}%`;
-			card.style[this.aspectRatioPrefix] = `${aspectRatio}`;
+			card.style.height = `${
+				card.getBoundingClientRect().width / aspectRatio
+			}px`;
 
 			card.style[this.gridRowPrefix] = `${number}/${number + 1}`;
 			card.style[this.gridColumnPrefix] = `${number % 2 === 0 ? 2 : 1}/${
@@ -57,10 +59,13 @@ export default class Works extends Page {
 	}
 
 	onResize() {
+		this.positionCards();
+
 		if (this.elements.cardsWrapper) {
 			this.scroll.limit =
 				this.elements.cardsWrapper.clientHeight - window.innerHeight;
-			this.scroll.target = 0;
 		}
+
+		this.scroll.target = 0;
 	}
 }
