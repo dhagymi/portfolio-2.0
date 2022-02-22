@@ -39,6 +39,6 @@ class DeviceDetection {
 	}
 }
 
-const DetectionManager = new Detection();
+const DetectionManager = new DeviceDetection();
 
 export default DetectionManager;

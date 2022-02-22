@@ -77,6 +77,11 @@ app.set("views", join(__dirname, "views"));
 app.set("view engine", "pug");
 
 const handleRequest = async (api) => {
+	const home = await api.getSingle("home");
+	const error = await api.getSingle("error_page");
+	const works = await api.getSingle("works_page");
+	const contact = await api.getSingle("contact_page");
+	const about = await api.getSingle("about");
 	const meta = await api.getSingle("meta");
 	const header = await api.getSingle("header");
 	const navigation = header.data.body
@@ -96,14 +101,53 @@ const handleRequest = async (api) => {
 				abbreviation,
 			};
 		});
+
 	const {
 		data: { social_network: social },
 	} = await api.getSingle("social");
-	/* 	const preloader = await api.getSingle("preloader"); */
+
+	const cards = about.data.body
+		.filter((slice) => slice.slice_type === "card")
+		.map(({ items: [text], primary: { name, image } }) => {
+			return { text, name, image };
+		});
+
+	const { results: skillsResult } = await api.query(
+		Prismic.Predicates.at("document.type", "skills")
+	);
+
+	const skills = skillsResult.map((result) => result.data);
+
+	const { results: worksResult } = await api.query(
+		Prismic.Predicates.at("document.type", "work")
+	);
+
+	works.data.items = worksResult.map((result) => result.data);
+
+	const assets = [];
+
+	assets.push(home.data.mica_card[0].image.url);
+	assets.push(home.data.agus_card[0].image.url);
+
+	cards.forEach((card) => {
+		assets.push(card.image.url);
+	});
+
+	works.data.items.forEach((work) => {
+		assets.push(work.image.url);
+	});
 
 	return {
+		about,
+		cards,
+		contact,
+		works,
+		skills,
 		meta,
+		error,
 		header,
+		home,
+		assets,
 		social,
 		navigation,
 		languages,
@@ -115,36 +159,18 @@ router.get("/", async (req, res) => {
 	const api = await initApi(req);
 
 	const defaults = await handleRequest(api);
-	const home = await api.getSingle("home");
 
 	res.render("pages/home", {
 		...defaults,
-		home,
 	});
 });
 router.get("/about", async (req, res) => {
 	const api = await initApi(req);
 
 	const defaults = await handleRequest(api);
-	const about = await api.getSingle("about");
-
-	const cards = about.data.body
-		.filter((slice) => slice.slice_type === "card")
-		.map(({ items: [text], primary: { name, image } }) => {
-			return { text, name, image };
-		});
-
-	const { results } = await api.query(
-		Prismic.Predicates.at("document.type", "skills")
-	);
-
-	const skills = results.map((result) => result.data);
 
 	res.render("pages/about", {
 		...defaults,
-		about,
-		cards,
-		skills,
 	});
 });
 
@@ -152,11 +178,9 @@ router.get("/contact", async (req, res) => {
 	const api = await initApi(req);
 
 	const defaults = await handleRequest(api);
-	const contact = await api.getSingle("contact_page");
 
 	res.render("pages/contact", {
 		...defaults,
-		contact,
 	});
 });
 
@@ -164,17 +188,9 @@ router.get("/works", async (req, res) => {
 	const api = await initApi(req);
 
 	const defaults = await handleRequest(api);
-	const works = await api.getSingle("works_page");
-
-	const { results } = await api.query(
-		Prismic.Predicates.at("document.type", "work")
-	);
-
-	works.data.items = results.map((result) => result.data);
 
 	res.render("pages/works", {
 		...defaults,
-		works,
 	});
 });
 
@@ -182,11 +198,9 @@ router.get("/*", async (req, res) => {
 	const api = await initApi(req);
 
 	const defaults = await handleRequest(api);
-	const error = await api.getSingle("error_page");
 
 	res.status(404).render("pages/error", {
 		...defaults,
-		error,
 	});
 });
 

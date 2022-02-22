@@ -9,7 +9,7 @@ export default class Contact extends Page {
 				wrapper: ".contact__wrapper",
 				button: ".contact__body__button",
 			},
-			title: "",
+			title: { en: "Contact", es: "Contacto" },
 		});
 	}
 }

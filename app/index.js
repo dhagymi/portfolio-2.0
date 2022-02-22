@@ -1,11 +1,14 @@
 import { each } from "lodash";
 
+import LanguageDetection from "classes/LanguageDetection.js";
+
 import About from "pages/About/index.js";
 import Home from "pages/Home/index.js";
 import Contact from "pages/Contact/index.js";
 import Works from "pages/Works/index.js";
 import ErrorPage from "pages/Error/index.js";
 
+import Canvas from "components/Canvas/index.js";
 import Cursor from "components/Cursor.js";
 import Preloader from "components/Preloader.js";
 import Options from "components/Options.js";
@@ -15,8 +18,10 @@ import ScrollBar from "components/ScrollBar.js";
 
 class App {
 	constructor() {
+		this.createLang();
 		this.createContent();
 
+		this.createCanvas();
 		this.createCursor();
 		this.createPreloader();
 		this.createMenu();
@@ -39,13 +44,25 @@ class App {
 
 	/* Creates */
 
+	createLang() {
+		this.lang = LanguageDetection.detectLanguage();
+	}
+
+	createCanvas() {
+		this.canvas = new Canvas({
+			template: this.template,
+		});
+	}
+
 	createCursor() {
 		this.cursor = new Cursor();
 		this.cursor.create();
 	}
 
 	createPreloader() {
-		this.preloader = new Preloader();
+		this.preloader = new Preloader({
+			canvas: this.canvas,
+		});
 		this.preloader.once("completed", this.onPreloaded.bind(this));
 	}
 
@@ -96,7 +113,7 @@ class App {
 
 	createTitle() {
 		this.title = document.querySelector("title");
-		this.title.innerText = `DHÁTeam  |  ${this.page.title}`;
+		this.title.innerText = `DHÁ Team  |  ${this.page.title[this.lang]}`;
 	}
 
 	/* Links */
@@ -151,7 +168,7 @@ class App {
 	}
 
 	/* Loop */
-	update() {
+	update(time) {
 		if (this.page && this.page.update) {
 			this.page.update();
 		}
@@ -170,6 +187,10 @@ class App {
 
 		if (this.cursor && this.cursor.update) {
 			this.cursor.update(true);
+		}
+
+		if (this.canvas && this.canvas.update) {
+			this.canvas.update(this.page.scroll, time);
 		}
 
 		this.frame = window.requestAnimationFrame(this.update.bind(this));
@@ -209,6 +230,7 @@ class App {
 
 			this.content.setAttribute("data-template", this.template);
 			this.content.innerHTML = divContent.innerHTML;
+			this.canvas.onChange(this.template);
 
 			this.page = this.pages[this.template];
 			this.page.create();
@@ -233,9 +255,12 @@ class App {
 	onPreloaded() {
 		this.preloader.destroy();
 
+		this.canvas.onPreloaded();
+
 		this.onResize();
 
 		this.page.show();
+		this.arrow.specialAddEventListeners();
 	}
 
 	onResize() {
@@ -251,6 +276,11 @@ class App {
 				this.arrow.onResize(this.page.elements.wrapper);
 			}
 		}
+		window.requestAnimationFrame((_) => {
+			if (this.canvas && this.canvas.onResize) {
+				this.canvas.onResize();
+			}
+		});
 	}
 
 	/* Listeners */

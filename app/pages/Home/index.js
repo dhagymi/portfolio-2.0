@@ -12,7 +12,10 @@ export default class Home extends Page {
 				argentinaLabel: ".home__title__line--4",
 				germanyLabel: ".home__title__line--5",
 			},
-			title: "",
+			title: {
+				en: "Developers & Designers",
+				es: "Desarrolladores y diseñadores",
+			},
 		});
 	}
 

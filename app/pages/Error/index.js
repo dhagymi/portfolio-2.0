@@ -6,7 +6,7 @@ export default class ErrorPage extends Page {
 			id: "error",
 			element: ".error",
 			elements: { wrapper: ".error__wrapper" },
-			title: "",
+			title: { en: "Page not found", es: "Página no encontrada" },
 		});
 	}
 }

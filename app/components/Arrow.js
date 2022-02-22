@@ -6,9 +6,12 @@ export default class Arrow extends Component {
 			element: ".options__arrow",
 			elements: { wrapper: ".options__arrow__wrapper" },
 			isScrolleable: false,
+			generalComponents: { cursor: ".cursor__circle" },
 		});
 
 		this.template = template;
+
+		this.onMouseMoveEvent = this.onMouseMove.bind(this);
 	}
 
 	/* Loop */
@@ -59,5 +62,38 @@ export default class Arrow extends Component {
 				this.show();
 			}, 500);
 		}
+	}
+
+	onMouseMove({ clientX, clientY }) {
+		const rect = this.elements.wrapper.getBoundingClientRect();
+
+		if (
+			clientX >= rect.left &&
+			clientX <= rect.left + rect.width &&
+			clientY >= rect.top &&
+			clientY <= rect.top + rect.height
+		) {
+			if (
+				!this.generalComponents.cursor.classList.contains(
+					"cursor__circle--scroll"
+				)
+			)
+				this.generalComponents.cursor.classList.add("cursor__circle--scroll");
+		} else {
+			if (
+				this.generalComponents.cursor.classList.contains(
+					"cursor__circle--scroll"
+				)
+			)
+				this.generalComponents.cursor.classList.remove(
+					"cursor__circle--scroll"
+				);
+		}
+	}
+
+	/* Listeners */
+
+	specialAddEventListeners() {
+		window.addEventListener("mousemove", this.onMouseMoveEvent);
 	}
 }

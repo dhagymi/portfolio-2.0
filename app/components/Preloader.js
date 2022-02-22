@@ -1,10 +1,11 @@
 import { each } from "lodash";
+import { Texture } from "ogl";
 import GSAP from "gsap";
 
 import Component from "classes/Component.js";
 
 export default class Preloader extends Component {
-	constructor() {
+	constructor({ canvas }) {
 		super({
 			element: ".preloader",
 			elements: {
@@ -12,6 +13,10 @@ export default class Preloader extends Component {
 				images: document.querySelectorAll("img"),
 			},
 		});
+
+		this.canvas = canvas;
+
+		window.TEXTURES = {};
 
 		this.create();
 
@@ -21,25 +26,33 @@ export default class Preloader extends Component {
 	}
 
 	createLoader() {
-		each(this.elements.images, (element) => {
-			const image = new Image();
-			image.addEventListener("load", () => this.onAssetLoaded(true));
-			image.src = element.getAttribute("data-src");
-		});
+		window.ASSETS.forEach((image) => {
+			const texture = new Texture(this.canvas.gl, {
+				generateMipmaps: false,
+			});
 
-		if (this.elements.images.length === 0) {
-			this.onAssetLoaded(false);
-		}
+			const media = new window.Image();
+
+			media.crossOrigin = "anonymous";
+			media.src = image;
+			media.onload = (_) => {
+				texture.image = media;
+
+				this.onAssetLoaded();
+			};
+
+			window.TEXTURES[image] = texture;
+		});
 	}
 
-	onAssetLoaded(haveLength) {
+	onAssetLoaded() {
 		this.length += 1;
 
-		this.charge = haveLength ? this.length / this.elements.images.length : 1;
+		const percent = this.length / window.ASSETS.length;
 
-		this.elements.number.innerHTML = `${Math.round(this.charge * 100)}%`;
+		this.elements.number.innerHTML = `${Math.round(percent * 100)}%`;
 
-		if (this.charge === 1) {
+		if (percent === 1) {
 			this.onLoaded();
 		}
 	}

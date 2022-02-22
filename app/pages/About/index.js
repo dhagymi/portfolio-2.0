@@ -16,7 +16,7 @@ export default class About extends Page {
 				developerStripe: ".about__animatedText--1",
 				designerStripe: ".about__animatedText--2",
 			},
-			title: "",
+			title: { en: "About us", es: "Nosotros" },
 		});
 
 		this.transformPrefix = prefix("transform");

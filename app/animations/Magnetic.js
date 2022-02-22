@@ -8,8 +8,6 @@ export default class Magnetic extends Animation {
 	constructor({ element, elements }) {
 		super({ element, elements });
 
-		console.log(this.element.children);
-
 		this.elements.text = this.element.children;
 
 		this.x = new Array(this.elements.text.length).fill(null).map((_) => {
