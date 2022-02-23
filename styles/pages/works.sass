@@ -16,19 +16,14 @@
     &__title
         @extend %title-120
 
-        left: 73.2rem
+        left: 50%
         letter-spacing: .7rem
         position: absolute
-        top: 40.5rem
-
-        @include media("<tablet")
-            left: 19.5rem
-            top: 55.5rem
+        top: 50%
+        transform: translate(-50%, -50%)
 
         @include media("<phone")
-            left: 10.5rem
             letter-spacing: 0.5rem
-            top: 31rem
 
     &__cardsWrapper
         align-items: center
@@ -73,6 +68,16 @@
             text-transform: none
             transition: opacity .5s
             user-select: none
+
+            @include media("<tablet")
+                bottom: -3rem
+                font-size: 1.8rem
+                opacity: 1
+
+            @include media("<phone")
+                bottom: -2.5rem
+                font-size: 1.2rem
+                left: 0.5rem
 
         &__image
             width: 100%
