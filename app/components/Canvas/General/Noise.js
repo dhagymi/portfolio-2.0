@@ -58,7 +58,7 @@ export default class {
 			{
 				duration: 2,
 				ease: "expo.inOut",
-				value: 0.05,
+				value: 0.03,
 			},
 			"start"
 		);
