@@ -1,4 +1,3 @@
-import { each } from "lodash";
 import { Texture } from "ogl";
 import GSAP from "gsap";
 

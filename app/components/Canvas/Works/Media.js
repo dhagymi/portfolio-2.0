@@ -104,7 +104,7 @@ export default class {
 	 */
 	show(isPreloaded) {
 		this.timelineIn = GSAP.timeline({
-			delay: GSAP.utils.random(0.5, 1),
+			delay: GSAP.utils.random(0, 0.3),
 		});
 
 		this.timelineIn.fromTo(

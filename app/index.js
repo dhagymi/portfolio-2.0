@@ -21,6 +21,7 @@ class App {
 		this.createLang();
 		this.createContent();
 
+		this.createGeneralCanvas();
 		this.createCanvas();
 		this.createCursor();
 		this.createPreloader();
@@ -46,6 +47,12 @@ class App {
 
 	createLang() {
 		this.lang = LanguageDetection.detectLanguage();
+	}
+
+	createGeneralCanvas() {
+		this.generalCanvas = new Canvas({
+			general: true,
+		});
 	}
 
 	createCanvas() {
@@ -193,6 +200,10 @@ class App {
 			this.canvas.update(this.page.scroll, time);
 		}
 
+		if (this.generalCanvas && this.generalCanvas.update) {
+			this.generalCanvas.update(null, time);
+		}
+
 		this.frame = window.requestAnimationFrame(this.update.bind(this));
 	}
 
@@ -257,6 +268,7 @@ class App {
 		this.preloader.destroy();
 
 		this.canvas.onPreloaded();
+		this.generalCanvas.onPreloaded();
 
 		this.onResize();
 
@@ -276,6 +288,12 @@ class App {
 			if (this.arrow?.onResize) {
 				this.arrow.onResize(this.page.elements.wrapper);
 			}
+			window.requestAnimationFrame((_) => {
+				if (this.generalCanvas && this.generalCanvas.onResize) {
+					this.generalCanvas.onResize();
+				}
+			});
+
 			window.requestAnimationFrame((_) => {
 				if (this.canvas && this.canvas.onResize) {
 					this.canvas.onResize();

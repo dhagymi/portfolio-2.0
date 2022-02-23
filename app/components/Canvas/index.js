@@ -2,10 +2,12 @@ import { Camera, Renderer, Transform } from "ogl";
 import normalizeWheel from "normalize-wheel";
 
 import Works from "./Works/index.js";
+import General from "./General/index.js";
 
 export default class Canvas {
-	constructor({ template }) {
+	constructor({ template, general }) {
 		this.template = template;
+		this.isGeneral = general;
 
 		this.x = {
 			start: 0,
@@ -72,22 +74,43 @@ export default class Canvas {
 	}
 
 	/**
+	 * General
+	 */
+
+	createGeneral() {
+		this.general = new General({
+			gl: this.gl,
+			scene: this.scene,
+			sizes: this.sizes,
+		});
+	}
+
+	/**
 	 * Events.
 	 */
 	onPreloaded() {
-		if (this.template === "works") {
-			this.createWorks();
+		if (this.isGeneral) {
+			this.createGeneral();
+		} else {
+			if (this.template === "works") {
+				this.createWorks();
+			}
 		}
 
 		this.onChange(this.template, true);
 	}
 
 	onChange(template, isPreloaded) {
-		if (template === "works") {
-			this.createWorks();
-			this.works.show(isPreloaded);
-		} else if (this.works) {
-			this.destroyWorks();
+		if (this.isGeneral) {
+			this.createGeneral();
+			this.general.show(isPreloaded);
+		} else {
+			if (template === "works") {
+				this.createWorks();
+				this.works.show(isPreloaded);
+			} else if (this.works) {
+				this.destroyWorks();
+			}
 		}
 
 		this.template = template;
@@ -117,12 +140,18 @@ export default class Canvas {
 			sizes: this.sizes,
 		};
 
+		if (this.isGeneral && this.general) {
+			this.general.onResize(values);
+		}
+
 		if (this.works) {
 			this.works.onResize(values);
 		}
 	}
 
 	onTouchDown(event) {
+		if (this.isGeneral) return;
+
 		this.isDown = true;
 
 		this.x.start = event.touches ? event.touches[0].clientX : event.clientX;
@@ -139,6 +168,8 @@ export default class Canvas {
 	}
 
 	onTouchMove(event) {
+		if (this.isGeneral) return;
+
 		const x = event.touches ? event.touches[0].clientX : event.clientX;
 		const y = event.touches ? event.touches[0].clientY : event.clientY;
 
@@ -158,6 +189,8 @@ export default class Canvas {
 	}
 
 	onTouchUp(event) {
+		if (this.isGeneral) return;
+
 		this.isDown = false;
 
 		const x = event.changedTouches
@@ -183,6 +216,8 @@ export default class Canvas {
 	onWheel(event) {
 		const { pixelY } = normalizeWheel(event);
 
+		if (this.isGeneral) return;
+
 		if (this.works) {
 			this.works.onWheel({ pixelY });
 		}
@@ -192,8 +227,12 @@ export default class Canvas {
 	 * Loop.
 	 */
 	update(scroll, time) {
-		if (this.works) {
-			this.works.update(time);
+		if (!this.isGeneral) {
+			if (this.works) {
+				this.works.update(time);
+			}
+		} else if (this.general) {
+			this.general.update(time);
 		}
 
 		this.renderer.render({
