@@ -14,6 +14,7 @@ uniform bool uFirstWave;
 uniform bool uHover;
 uniform vec2 uViewportSizes;
 uniform vec2 uCardSizes;
+uniform vec2 uImageSizes;
 uniform vec2 uResolution;
 
 uniform mat4 modelViewMatrix;
@@ -40,6 +41,7 @@ void main() {
   vec2 s = r + amplitude * (p - q) + 0.5;
 
   if(uHover){
+
     
     if(uFirstWave){    
       vec2 aspectRatioMultiplier = vec2(1.0, uAspectRatio);

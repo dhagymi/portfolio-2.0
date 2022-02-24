@@ -44,9 +44,9 @@ export default class {
 	}
 
 	createTexture() {
-		const image = this.element;
+		this.image = this.element;
 
-		this.texture = window.TEXTURES[image.getAttribute("data-src")];
+		this.texture = window.TEXTURES[this.image.getAttribute("data-src")];
 	}
 
 	createProgram() {
@@ -65,8 +65,14 @@ export default class {
 				uViewportSizes: { value: [this.sizes.width, this.sizes.height] },
 				uCardSizes: {
 					value: [
-						this.element.getBoundingClientRect().width,
-						this.element.getBoundingClientRect().height,
+						parseFloat(this.element.getBoundingClientRect().width),
+						parseFloat(this.element.getBoundingClientRect().height),
+					],
+				},
+				uImageSizes: {
+					value: [
+						parseFloat(this.image.naturalWidth),
+						parseFloat(this.image.naturalHeight),
 					],
 				},
 				uScrollSpeed: { value: 0 },
@@ -77,6 +83,15 @@ export default class {
 				uAspectRatio: { value: this.aspectRatio },
 			},
 		});
+
+		const normalizedImages = [
+			(this.program.uniforms.uImageSizes.value[0] *
+				this.program.uniforms.uCardSizes.value[1]) /
+				this.program.uniforms.uImageSizes.value[1],
+			(this.program.uniforms.uImageSizes.value[1] *
+				this.program.uniforms.uCardSizes.value[1]) /
+				this.program.uniforms.uImageSizes.value[1],
+		];
 	}
 
 	createMesh() {
@@ -86,7 +101,6 @@ export default class {
 		});
 
 		this.mesh.setParent(this.scene);
-		// this.mesh.rotation.z = GSAP.utils.random(-Math.PI * 0.03, Math.PI * 0.03)
 	}
 
 	createBounds({ sizes }) {
@@ -161,6 +175,13 @@ export default class {
 		this.createBounds(sizes);
 		this.updateX(scroll && scroll.x);
 		this.updateY(scroll && scroll.y);
+
+		this.program.uniforms.uCardSizes.value[0] = parseFloat(
+			this.element.getBoundingClientRect().width
+		);
+		this.program.uniforms.uCardSizes.value[1] = parseFloat(
+			this.element.getBoundingClientRect().hieght
+		);
 	}
 
 	onMouseOver() {
@@ -196,6 +217,14 @@ export default class {
 			this.mesh.scale.x / 2 +
 			this.x * this.sizes.width +
 			this.extra.x;
+
+		this.program.uniforms.uCardSizes.value[0] = parseFloat(
+			this.element.getBoundingClientRect().width
+		);
+
+		this.program.uniforms.uImageSizes.value[0] = parseFloat(
+			this.image.naturalWidth
+		);
 	}
 
 	updateY(y = 0) {
@@ -206,6 +235,14 @@ export default class {
 			this.mesh.scale.y / 2 -
 			this.y * this.sizes.height +
 			this.extra.y;
+
+		this.program.uniforms.uCardSizes.value[1] = parseFloat(
+			this.element.getBoundingClientRect().height
+		);
+
+		this.program.uniforms.uImageSizes.value[1] = parseFloat(
+			this.image.naturalHeight
+		);
 	}
 
 	update(scroll, gettedTime, speed) {

@@ -64,7 +64,8 @@ export default class {
 				scene: this.group,
 				sizes: this.sizes,
 				aspectRatio: parseFloat(
-					element.parentNode.parentNode.style.aspectRatio.split(" / ")[0]
+					element.parentNode.parentNode.getBoundingClientRect().width /
+						element.parentNode.parentNode.getBoundingClientRect().height
 				),
 			});
 		});
