@@ -152,10 +152,9 @@ export default class Canvas {
 	onTouchDown(event) {
 		if (this.isGeneral) return;
 
-		this.isDown = true;
+		this.isTouching = true;
 
-		this.x.start = event.touches ? event.touches[0].clientX : event.clientX;
-		this.y.start = event.touches ? event.touches[0].clientY : event.clientY;
+		this.y.start = event.touches[0].clientY;
 
 		const values = {
 			x: this.x,
@@ -170,18 +169,16 @@ export default class Canvas {
 	onTouchMove(event) {
 		if (this.isGeneral) return;
 
-		const x = event.touches ? event.touches[0].clientX : event.clientX;
-		const y = event.touches ? event.touches[0].clientY : event.clientY;
+		if (!this.isTouching) return;
 
-		this.x.end = x;
-		this.y.end = y;
+		this.y.end = event.touches[0].clientY;
+
+		this.y.difference = this.y.start - this.y.end;
+		this.y.start = this.y.end;
 
 		const values = {
-			x: this.x,
 			y: this.y,
 		};
-
-		if (!this.isDown) return;
 
 		if (this.works) {
 			this.works.onTouchMove(values);
@@ -191,20 +188,13 @@ export default class Canvas {
 	onTouchUp(event) {
 		if (this.isGeneral) return;
 
-		this.isDown = false;
+		this.isTouching = false;
 
-		const x = event.changedTouches
-			? event.changedTouches[0].clientX
-			: event.clientX;
-		const y = event.changedTouches
-			? event.changedTouches[0].clientY
-			: event.clientY;
+		this.y.end = event.changedTouches[0].clientY;
 
-		this.x.end = x;
-		this.y.end = y;
+		this.y.difference = this.y.start - this.y.end;
 
 		const values = {
-			x: this.x,
 			y: this.y,
 		};
 

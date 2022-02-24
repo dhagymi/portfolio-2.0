@@ -104,20 +104,20 @@ export default class {
 		map(this.medias, (media) => media.onResize(event, this.scroll));
 	}
 
-	onTouchDown({ x, y }) {
+	onTouchDown({ y }) {
 		this.scrollCurrent.x = this.scroll.x;
 		this.scrollCurrent.y = this.scroll.y;
 	}
 
-	onTouchMove({ x, y }) {
-		const yDistance = y.start - y.end;
-
-		this.y.target = this.scrollCurrent.y - yDistance;
+	onTouchMove({ y }) {
+		this.y.target -= y.difference * 4;
 	}
 
-	onTouchUp({ x, y }) {}
+	onTouchUp({ y }) {
+		this.y.target -= y.difference * 4;
+	}
 
-	onWheel({ pixelX, pixelY }) {
+	onWheel({ pixelY }) {
 		this.y.target -= pixelY;
 	}
 
@@ -142,32 +142,9 @@ export default class {
 			this.y.lerp
 		);
 
-		if (this.scroll.y < this.y.current) {
-			this.y.direction = "top";
-		} else if (this.scroll.y > this.y.current) {
-			this.y.direction = "bottom";
-		}
-
 		this.scroll.y = this.y.current;
 
-		map(this.medias, (media, index) => {
-			const offsetY = this.sizes.height * 0.5;
-			const scaleY = media.mesh.scale.y / 2;
-
-			if (this.y.direction === "top") {
-				const y = media.mesh.position.y + scaleY;
-
-				if (y < -offsetY) {
-					media.extra.y += this.gallerySizes.height;
-				}
-			} else if (this.y.direction === "bottom") {
-				const y = media.mesh.position.y - scaleY;
-
-				if (y > offsetY) {
-					media.extra.y -= this.gallerySizes.height;
-				}
-			}
-
+		map(this.medias, (media) => {
 			media.update(this.scroll, time, this.speed);
 		});
 	}
