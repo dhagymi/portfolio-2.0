@@ -1,0 +1,10 @@
+/* SITE INFORMATION */
+
+	Site name:  	Ramiro Zayas Site
+	Site URL:   	https://dha-portfolio.herokuapp.com/
+	Web develop:	Agustín Andreacchi
+	Web design:		Micaela Zayas
+	Contact:    	https://dha-portfolio.herokuapp.com/en/contact/
+	Location:   	Germany
+	Built with: 	Express
+	Launched:   	2022
