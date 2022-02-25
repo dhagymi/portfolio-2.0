@@ -98,16 +98,16 @@ export default class {
 			width: (this.galleryBounds.width / window.innerWidth) * this.sizes.width,
 		};
 
-		this.scroll.y = this.y.target = 0;
+		this.scroll.y = 0;
 		this.y.limit = this.galleryBounds.height - window.innerHeight;
 
-		map(this.medias, (media) => media.onResize(event, this.scroll));
+		this.y.current = 0;
+		this.y.target = 0;
+
+		map(this.medias, (media) => media.onResize(this.sizes, this.scroll));
 	}
 
-	onTouchDown({ y }) {
-		this.scrollCurrent.x = this.scroll.x;
-		this.scrollCurrent.y = this.scroll.y;
-	}
+	onTouchDown({ y }) {}
 
 	onTouchMove({ y }) {
 		this.y.target -= y.difference * 4;
@@ -142,10 +142,8 @@ export default class {
 			this.y.lerp
 		);
 
-		this.scroll.y = this.y.current;
-
 		map(this.medias, (media) => {
-			media.update(this.scroll, time, this.speed);
+			media.update(this.y, time, this.speed);
 		});
 	}
 

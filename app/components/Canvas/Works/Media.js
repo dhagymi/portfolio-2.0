@@ -109,8 +109,6 @@ export default class {
 		this.bounds = this.element.parentNode.parentNode.getBoundingClientRect();
 
 		this.updateScale();
-		this.updateX();
-		this.updateY();
 	}
 
 	/**
@@ -172,9 +170,7 @@ export default class {
 			y: 0,
 		};
 
-		this.createBounds(sizes);
-		this.updateX(scroll && scroll.x);
-		this.updateY(scroll && scroll.y);
+		this.createBounds({ sizes });
 
 		this.program.uniforms.uCardSizes.value[0] = parseFloat(
 			this.element.getBoundingClientRect().width
@@ -245,9 +241,9 @@ export default class {
 		);
 	}
 
-	update(scroll, gettedTime, speed) {
+	update(y, gettedTime, speed) {
 		this.updateX();
-		this.updateY(scroll.y);
+		this.updateY(y.current);
 
 		this.program.uniforms.uScrollSpeed.value = speed.current;
 

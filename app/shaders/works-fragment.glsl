@@ -14,10 +14,10 @@ void main() {
 
   if(uImageSizes.x * uCardSizes.y / (uImageSizes.y * uCardSizes.x) > 1.0){
     normalizedImageSizes = vec2(uImageSizes.x * uCardSizes.y / uImageSizes.y, uImageSizes.y * uCardSizes.y / uImageSizes.y);
-    finalUv = vec2(vUv.x / (normalizedImageSizes.x / uCardSizes.x) + (normalizedImageSizes.x / uCardSizes.x - 1.0) / 4.0, vUv.y / (normalizedImageSizes.y / uCardSizes.y) );
+    finalUv = vec2(vUv.x / (normalizedImageSizes.x / uCardSizes.x) + (1.0 - uCardSizes.x / normalizedImageSizes.x) / 2.0, vUv.y / (normalizedImageSizes.y / uCardSizes.y) );
   } else {
     normalizedImageSizes = vec2(uImageSizes.x * uCardSizes.x / uImageSizes.x, uImageSizes.y * uCardSizes.x / uImageSizes.x);
-    finalUv = vec2(vUv.x / (normalizedImageSizes.x / uCardSizes.x), vUv.y / (normalizedImageSizes.y / uCardSizes.y) + (normalizedImageSizes.y / uCardSizes.y - 1.0) / 4.0);
+    finalUv = vec2(vUv.x / (normalizedImageSizes.x / uCardSizes.x), vUv.y / (normalizedImageSizes.y / uCardSizes.y) + (1.0 - uCardSizes.y / normalizedImageSizes.y) /2.0);
   }
 
   vec4 texture = texture2D(tMap, finalUv);
