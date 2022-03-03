@@ -16,6 +16,32 @@ export default class {
 		this.createBounds({
 			sizes: this.sizes,
 		});
+
+		this.stepTime = 0;
+
+		const container = document.createElement("div");
+		container.style.position = "absolute";
+		container.style.left = "0";
+		container.style.top = "0";
+		container.style.zIndex = "11";
+		container.style.color = "white";
+		container.innerHTML = `
+			<input id="alpha" type="range" min="0" max="0.2" step="0.02" list="tickmarks">
+			<datalist id="tickmarks">
+				<option value="0" label="0">
+				<option value="0.02">
+				<option value="0.04">
+				<option value="0.06">
+				<option value="0.08">
+				<option value="0.1" label="0.1%">
+				<option value="0.12">
+				<option value="0.14">
+				<option value="0.16">
+				<option value="0.18">
+				<option value="0.2" label="0.2">
+			</datalist>
+		`;
+		document.body.appendChild(container);
 	}
 
 	createProgram() {
@@ -58,7 +84,7 @@ export default class {
 			{
 				duration: 2,
 				ease: "expo.inOut",
-				value: 0.03,
+				value: 0.08,
 			},
 			"start"
 		);
@@ -83,6 +109,12 @@ export default class {
 	}
 
 	update(time) {
-		this.program.uniforms.uTime.value = parseFloat(time * 0.001);
+		if (time - this.stepTime > 10) {
+			this.stepTime = time;
+			this.program.uniforms.uTime.value = parseFloat(time * 0.001);
+			this.program.uniforms.uAlpha.value = parseFloat(
+				document.querySelector("#alpha").value
+			);
+		}
 	}
 }

@@ -102,7 +102,6 @@ export default class Canvas {
 
 	onChange(template, isPreloaded) {
 		if (this.isGeneral) {
-			this.createGeneral();
 			this.general.show(isPreloaded);
 		} else {
 			if (template === "works") {

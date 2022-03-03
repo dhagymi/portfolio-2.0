@@ -4,11 +4,12 @@ nav.menu
     .menu__header
         a.menu__header__logo(href=Link(lang, header.data.logo_link))!=meta.data.title[0][lang]+header.data.logo_svg
 
-        ul.menu__header__languages 
-            each lang, index in languages 
-                li.menu__header__languages__item
-                    a.menu__header__languages__link(href="/" data-language=lang.short_key)
-                        span.menu__header__languages__label=lang.abbreviation
+        if availableLangs.length > 1
+            ul.menu__header__languages 
+                each lang, index in languages 
+                    li.menu__header__languages__item
+                        a.menu__header__languages__link(href="/" data-language=lang.short_key)
+                            span.menu__header__languages__label=lang.abbreviation
 
         button(class=`menu__header__close ${isDesktop ? "" : "menu__header__close--active"}`)
             .menu__header__close__cross
