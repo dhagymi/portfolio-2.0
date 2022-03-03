@@ -2,9 +2,9 @@
     background: $component-color
     display: flex
     flex-direction: column
-    left: 0
     height: 100vh
     justify-content: center
+    left: 0
     position: fixed
     top: 0
     visibility: hidden
@@ -15,6 +15,21 @@
 
         @include media("<tablet")
             visibility: visible
+
+    &__curtain
+        background: $component-color
+        border-bottom-left-radius: 200%
+        height: 100vh
+        left: 0
+        position: fixed
+        top: 0
+        transform: translateX(100%) translateY(-100%)
+        width: 100vw
+        z-index: z("menu")
+
+        &--active
+            border-radius: 0
+            transform: translateX(0) translateY(0)
 
     &__header
         height: 34rem
@@ -71,6 +86,10 @@
                     background: $text-color
                     color: $component-color
 
+                &--active
+                    background: $text-color
+                    color: $component-color
+
             &__link
                 align-items: center
                 display: flex
@@ -92,18 +111,29 @@
                 right: -0.4rem
                 top: 8.5rem
 
+            &__cross
+                opacity: 0
+                top: 0rem
+                position: absolute
+                width: 4rem
+                height: 4rem
+                right: -8rem
+
+                @include media("<phone")
+                    top: -0.5rem
+                    right: -6.5rem
+
             &__stripe
                 background: $text-color
                 height: 0.3rem
                 position: absolute
-                right: -7.7rem
-                top: 2.3rem
+                top: 2.1rem
                 width: 3.7rem
 
                 @include media("<phone")
                     height: 0.2rem
-                    right: -5.7rem
-                    top: 1.3rem
+                    right: 0.6rem
+                    top: 1.9rem
                     width: 2.8rem
 
                 &--1
@@ -116,6 +146,10 @@
                 display: inline-block
                 position: relative
                 top: 0.2rem
+                width: 10.5rem
+
+                @include media("<phone")
+                    width: 6.7rem
 
     &__navigation
         @extend %menu-90
@@ -146,10 +180,18 @@
                     position: absolute
                     top: 50%
                     transform: translateX(-50%)
-                    transition: opacity .3s
+                    transition: opacity .5s
                     width: 105%
 
+                    @include media("<phone")
+                        height: 0.5rem
+
                 &:hover
+
+                    &:after
+                        opacity: 1
+
+                &--active
 
                     &:after
                         opacity: 1

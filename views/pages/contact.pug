@@ -6,19 +6,22 @@ block variables
 block content
     .contact
         section.contact__wrapper
-            h1.contact__title
-                each line, index in contact.data.titles 
-                    span(class=`contact__title__line contact__title__line--${index + 1}`)=line[lang]
-            .contact__subtitles
-                each line, index in contact.data.subtitles 
-                    span(class=`contact__subtitles__line contact__subtitles__line--${index + 1}`)=line[lang]
-            .contact__body
-                each line, index in contact.data.secondary_titles 
-                    span(class=`contact__body__line contact__body__line--${index + 1}`)=line[lang]
-                button.contact__body__button=contact.data.button_text[0][lang]
-            .contact__footer
-                p.contact__footer__thanks=contact.data.thanks[0][lang]
-                p.contact__footer__social
-                    each item in social 
-                        a.contact__footer__social__link(href=item.link.url target=item.link.target)
-                            span.contact__footer__social__line=item.name
+            .contact__container
+                h1.contact__title
+                    each line, index in contact.data.titles 
+                        span(class=`contact__title__line contact__title__line--${index + 1}` data-animationfade="true")=line[lang]
+                .contact__subtitles
+                    each line, index in contact.data.subtitles 
+                        span(class=`contact__subtitles__line contact__subtitles__line--${index + 1}` data-animationfade="true")=line[lang]
+                .contact__body
+                    each line, index in contact.data.secondary_titles 
+                        span(class=`contact__body__line contact__body__line--${index + 1}` data-animationfade="true")=line[lang]
+                    a.contact__body__link(href=contact.data.mail_link)
+                        button.contact__body__button(data-animationfade="true" data-animationmagnetic="true")
+                            span=contact.data.button_text[0][lang]
+                .contact__footer
+                    p.contact__footer__thanks(data-animationfade="true")=contact.data.thanks[0][lang]
+                    p.contact__footer__social
+                        each item in social 
+                            a.contact__footer__social__link(href=item.link.url target=item.link.target data-animationfade="true")
+                                span.contact__footer__social__line=item.name

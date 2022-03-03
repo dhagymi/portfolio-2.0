@@ -9,18 +9,18 @@ block content
             .home__mainWrapper
                 h1.home__title
                     each title, index in home.data.main_titles
-                        span(class=`home__title__line home__title__line--${index + 1}`)=title[lang]
+                        span(class=`home__title__line home__title__line--${index + 1}` data-animationfade="true")=title[lang]
                 figure.home__card.home__card--mica
-                    img.home__card__image(src=home.data.mica_card[0].image.url, alt=home.data.mica_card[0].image.alt)
-                    figcaption.home__card__caption!=home.data.mica_card[0].name
+                    img.home__card__image(data-src=home.data.mica_card[0].image.url alt=home.data.mica_card[0].image.alt data-animationfade="true")
+                    figcaption.home__card__caption(data-animationfade="true")!=home.data.mica_card[0].name+"Mica"
                 figure.home__card.home__card--agus
-                    img.home__card__image(src=home.data.agus_card[0].image.url, alt=home.data.agus_card[0].image.alt)
-                    figcaption.home__card__caption!=home.data.agus_card[0].name
+                    img.home__card__image(data-src=home.data.agus_card[0].image.url alt=home.data.agus_card[0].image.alt data-animationfade="true")
+                    figcaption.home__card__caption(data-animationfade="true")!=home.data.agus_card[0].name+"Agus"
 
             .home__secondaryWrapper
                 h2.home__subtitle
                     each subtitle, index in home.data.secondary_titles
-                        span(class=`home__subtitle__line home__subtitle__line--${index + 1}`)=subtitle[lang]
+                        span(class=`home__subtitle__line home__subtitle__line--${index + 1}` data-animationfade="true")=subtitle[lang]
                 .home__text
                     each text, index in home.data.home_text
-                        div(class=`home__text__column home__text__column--${index + 1}`)!=PrismicDOM.RichText.asHtml(text[lang], Link)
+                        div(class=`home__text__column home__text__column--${index + 1}` data-animationfade="true")!=PrismicDOM.RichText.asHtml(text[lang], Link)

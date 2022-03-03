@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://dha-portfolio.herokuapp.com/sitemap.xml
