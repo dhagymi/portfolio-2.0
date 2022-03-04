@@ -1,6 +1,7 @@
 import { each } from "lodash";
 
-import LanguageDetection from "classes/LanguageDetection.js";
+import languageDetection from "classes/LanguageDetection.js";
+import deviceDetection from "classes/DeviceDetection.js";
 
 import About from "pages/About/index.js";
 import Home from "pages/Home/index.js";
@@ -41,12 +42,18 @@ class App {
 			`%cDeveloped & Designed by DHÁTeam ${String.fromCodePoint(0x0270c)}`,
 			"color: #EE4801; background: #1A1A1A; padding: 5px 10px; border-radius: 3px; font-family: 'Verdana'; font-weight: 600"
 		);
+
+		if (deviceDetection.isWebPSupported()) {
+			alert("si");
+		} else {
+			alert("no");
+		}
 	}
 
 	/* Creates */
 
 	createLang() {
-		this.lang = LanguageDetection.detectLanguage();
+		this.lang = languageDetection.detectLanguage();
 	}
 
 	createGeneralCanvas() {
