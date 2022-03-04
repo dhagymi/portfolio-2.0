@@ -11,5 +11,5 @@ block content
                 each work, index in works.data.items 
                     div(class=`works__card works__card--${index + 1}`)
                         a.works__card__link(href=work.link.url target=work.link.target)
-                            h2.works__card__title=work.title
-                            img.works__card__image(data-src=work.image.url alt=work.image.alt)
+                            h2.works__card__title(data-worksanimationfade="true")=work.title
+                            img.works__card__image(data-src=work.image.url alt=work.image.alt data-worksanimationfade="true")

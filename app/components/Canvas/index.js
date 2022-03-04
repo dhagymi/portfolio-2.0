@@ -1,6 +1,8 @@
 import { Camera, Renderer, Transform } from "ogl";
 import normalizeWheel from "normalize-wheel";
 
+import deviceDetection from "classes/DeviceDetection.js";
+
 import Works from "./Works/index.js";
 import General from "./General/index.js";
 
@@ -43,7 +45,9 @@ export default class Canvas {
 
 		this.gl = this.renderer.gl;
 
-		document.body.appendChild(this.gl.canvas);
+		if (!deviceDetection.isPhone()) {
+			document.body.appendChild(this.gl.canvas);
+		}
 	}
 
 	createCamera() {
