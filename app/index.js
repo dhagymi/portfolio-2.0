@@ -43,7 +43,7 @@ class App {
 			"color: #EE4801; background: #1A1A1A; padding: 5px 10px; border-radius: 3px; font-family: 'Verdana'; font-weight: 600"
 		);
 
-		if (deviceDetection.isWebPSupported()) {
+		if (deviceDetection.isPhone()) {
 			alert("si");
 		} else {
 			alert("no");
