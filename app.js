@@ -67,10 +67,12 @@ app.use((req, res, next) => {
 	res.locals.isTablet = ua.device.type === "tablet";
 
 	res.locals.Link = handleLinkResolver;
-	
+
 	res.locals.availableLangs = availableLangs;
 
 	res.locals.PrismicDOM = PrismicDOM;
+
+	res.locals.pathname = req.path.slice(1);
 
 	next();
 });
