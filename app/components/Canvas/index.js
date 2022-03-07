@@ -45,7 +45,7 @@ export default class Canvas {
 
 		this.gl = this.renderer.gl;
 
-		if (!deviceDetection.isPhone()) {
+		if (!deviceDetection.isPhone() || this.isGeneral) {
 			document.body.appendChild(this.gl.canvas);
 		}
 	}
