@@ -11,8 +11,7 @@ html(class=isDesktop ? "desktop" : isTablet ? "tablet" : isPhone ? "phone" : "" 
 
         title=meta.data.title[0][lang]
         meta(name="description" content=meta.data.description[0][lang])
-        link(rel="canonical" href=meta.data.canonical)
-        meta(name="keywords" content=meta.data.keywords)
+        link(rel="canonical" href=`${meta.data.canonical}${window.location.pathname}`)
 
         link(rel="apple-touch-icon" sizes="57x57" href="icons/apple-icon-57x57.png")
         link(rel="apple-touch-icon" sizes="60x60" href="icons/apple-icon-60x60.png")
