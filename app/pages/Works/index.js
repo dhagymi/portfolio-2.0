@@ -91,7 +91,7 @@ export default class Works extends Page {
 				card.children[0].children[1].style.opacity = "1";
 				card.children[0].children[1].style.visibility = "visible";
 
-				card.children[0].children[0].style.fontSize = "2.2rem";
+				card.children[0].children[0].style.fontSize = "2rem";
 				card.children[0].children[0].style.margin = "1rem .5rem";
 				card.children[0].children[0].style.bottom = "-4.5rem";
 				card.children[0].children[0].style.left = "0";
