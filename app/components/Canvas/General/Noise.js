@@ -19,7 +19,7 @@ export default class {
 			sizes: this.sizes,
 		});
 
-		this.uAlpha = deviceDetection.isPhone ? 0.05 : 0.1;
+		this.uAlpha = deviceDetection.isPhone() ? 0.05 : 0.1;
 
 		this.stepTime = 0;
 	}
