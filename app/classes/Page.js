@@ -5,6 +5,7 @@ import { each, map } from "lodash";
 
 import Fade from "animations/Fade.js";
 import Magnetic from "animations/Magnetic.js";
+import Float from "animations/Float.js";
 
 import Scroll from "classes/Scroll.js";
 import AsyncLoad from "classes/AsyncLoad.js";
@@ -17,6 +18,7 @@ export default class Page {
 
 			animationsFades: '[data-animationfade="true"]',
 			animationsMagnetic: '[data-animationmagnetic="true"]',
+			animationsFloat: '[data-animationfloat="true"]',
 
 			preloaders: "[data-src]",
 		};
@@ -91,6 +93,16 @@ export default class Page {
 					element: this.elements.animationsMagnetic,
 					elements: { text: "span" },
 				}),
+			];
+		}
+
+		if (this.elements.animationsFloat?.length > 1) {
+			this.animationsFloat = map(this.elements.animationsFloat, (element) => {
+				return new Float({ element });
+			});
+		} else if (this.elements.animationsFloat) {
+			this.animationsFloat = [
+				new Float({ element: this.elements.animationsFloat }),
 			];
 		}
 	}
@@ -177,6 +189,9 @@ export default class Page {
 
 	update() {
 		this.scroll.interpolate();
+
+		this.animationsFloat?.length &&
+			map(this.animationsFloat, (animation) => animation.update());
 
 		if (this.elements.wrapper) {
 			this.elements.wrapper.style[
