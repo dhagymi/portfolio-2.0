@@ -1,6 +1,6 @@
 /* SITE INFORMATION */
 
-	Site name:  	Ramiro Zayas Site
+	Site name:  	DHA Portfolio
 	Site URL:   	https://dha-portfolio.herokuapp.com/
 	Web develop:	Agustín Andreacchi
 	Web design:		Micaela Zayas
