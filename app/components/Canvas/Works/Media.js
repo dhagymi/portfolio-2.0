@@ -36,12 +36,6 @@ export default class {
 			sizes: this.sizes,
 		});
 		this.addEventListeners();
-
-		if (this.index === 1) {
-			setInterval(() => {
-				console.log(this.y);
-			}, 500);
-		}
 	}
 
 	createTexture() {

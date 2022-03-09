@@ -35,10 +35,6 @@ export default class {
 
 		this.createGeometry();
 		this.createGallery();
-
-		setInterval(() => {
-			console.log(this.y.target, this.y.current);
-		}, 500);
 	}
 
 	createGeometry() {

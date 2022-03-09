@@ -109,6 +109,9 @@ export default class Canvas {
 			this.general.show(isPreloaded);
 		} else {
 			if (template === "works") {
+				if (!this.works) {
+					this.createWorks();
+				}
 				this.works.show(isPreloaded);
 			} else if (this.works) {
 				this.destroyWorks();
