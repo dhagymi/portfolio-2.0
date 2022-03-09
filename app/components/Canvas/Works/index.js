@@ -25,16 +25,6 @@ export default class {
 			lerp: 0.1,
 		};
 
-		this.scrollCurrent = {
-			x: 0,
-			y: 0,
-		};
-
-		this.scroll = {
-			x: 0,
-			y: 0,
-		};
-
 		this.speed = {
 			current: 0,
 			target: 0,
@@ -45,6 +35,10 @@ export default class {
 
 		this.createGeometry();
 		this.createGallery();
+
+		setInterval(() => {
+			console.log(this.y.target, this.y.current);
+		}, 500);
 	}
 
 	createGeometry() {
@@ -98,13 +92,12 @@ export default class {
 			width: (this.galleryBounds.width / window.innerWidth) * this.sizes.width,
 		};
 
-		this.scroll.y = 0;
 		this.y.limit = this.galleryBounds.height - window.innerHeight;
 
 		this.y.current = 0;
 		this.y.target = 0;
 
-		map(this.medias, (media) => media.onResize(this.sizes, this.scroll));
+		map(this.medias, (media) => media.onResize(this.sizes));
 	}
 
 	onTouchDown({ y }) {}

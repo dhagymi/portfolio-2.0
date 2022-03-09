@@ -18,11 +18,6 @@ export default class {
 
 		this.timeZero = true;
 
-		this.extra = {
-			x: 0,
-			y: 0,
-		};
-
 		this.magnification = {
 			current: 0.05,
 			target: 0.05,
@@ -41,6 +36,12 @@ export default class {
 			sizes: this.sizes,
 		});
 		this.addEventListeners();
+
+		if (this.index === 1) {
+			setInterval(() => {
+				console.log(this.y);
+			}, 500);
+		}
 	}
 
 	createTexture() {
@@ -109,6 +110,7 @@ export default class {
 		this.bounds = this.element.parentNode.parentNode.getBoundingClientRect();
 
 		this.updateScale();
+		this.updateY();
 	}
 
 	/**
@@ -164,19 +166,14 @@ export default class {
 	/**
 	 * Events.
 	 */
-	onResize(sizes, scroll) {
-		this.extra = {
-			x: 0,
-			y: 0,
-		};
-
+	onResize(sizes) {
 		this.createBounds({ sizes });
 
 		this.program.uniforms.uCardSizes.value[0] = parseFloat(
 			this.element.getBoundingClientRect().width
 		);
 		this.program.uniforms.uCardSizes.value[1] = parseFloat(
-			this.element.getBoundingClientRect().hieght
+			this.element.getBoundingClientRect().height
 		);
 	}
 
@@ -209,10 +206,7 @@ export default class {
 		this.x = (this.bounds.left + x) / window.innerWidth;
 
 		this.mesh.position.x =
-			-this.sizes.width / 2 +
-			this.mesh.scale.x / 2 +
-			this.x * this.sizes.width +
-			this.extra.x;
+			-this.sizes.width / 2 + this.mesh.scale.x / 2 + this.x * this.sizes.width;
 
 		this.program.uniforms.uCardSizes.value[0] = parseFloat(
 			this.element.getBoundingClientRect().width
@@ -224,13 +218,15 @@ export default class {
 	}
 
 	updateY(y = 0) {
+		if (Math.abs(y) < 1) {
+			this.bounds = this.element.parentNode.parentNode.getBoundingClientRect();
+		}
 		this.y = (this.bounds.top + y) / window.innerHeight;
 
 		this.mesh.position.y =
 			this.sizes.height / 2 -
 			this.mesh.scale.y / 2 -
-			this.y * this.sizes.height +
-			this.extra.y;
+			this.y * this.sizes.height;
 
 		this.program.uniforms.uCardSizes.value[1] = parseFloat(
 			this.element.getBoundingClientRect().height

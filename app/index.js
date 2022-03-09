@@ -295,11 +295,9 @@ class App {
 				}
 			});
 
-			window.requestAnimationFrame((_) => {
-				if (this.canvas && this.canvas.onResize) {
-					this.canvas.onResize();
-				}
-			});
+			if (this.canvas && this.canvas.onResize) {
+				this.canvas.onResize();
+			}
 		}
 	}
 
