@@ -92,7 +92,7 @@ export default class Works extends Page {
 				card.children[0].children[1].style.visibility = "visible";
 
 				card.children[0].children[0].style.fontSize = "2rem";
-				card.children[0].children[0].style.margin = "1rem .5rem";
+				card.children[0].children[0].style.margin = "1rem 0";
 				card.children[0].children[0].style.top = "100%";
 				card.children[0].children[0].style.left = "0";
 			});
@@ -134,8 +134,7 @@ export default class Works extends Page {
 		if (this.elements.cardsWrapper) {
 			this.scroll.limit =
 				this.elements.cardsWrapper.clientHeight - window.innerHeight;
+			this.scroll.target = 0;
 		}
-
-		this.scroll.target = 0;
 	}
 }

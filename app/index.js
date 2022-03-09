@@ -284,10 +284,18 @@ class App {
 				this.options.onResize(this.page.elements.wrapper);
 			}
 			if (this.scrollBar?.onResize) {
-				this.scrollBar.onResize(this.page.elements.wrapper);
+				this.scrollBar.onResize(
+					this.template === "works"
+						? this.page.elements.cardsWrapper
+						: this.page.elements.wrapper
+				);
 			}
 			if (this.arrow?.onResize) {
-				this.arrow.onResize(this.page.elements.wrapper);
+				this.arrow.onResize(
+					this.template === "works"
+						? this.page.elements.cardsWrapper
+						: this.page.elements.wrapper
+				);
 			}
 			window.requestAnimationFrame((_) => {
 				if (this.generalCanvas && this.generalCanvas.onResize) {

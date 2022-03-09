@@ -114,6 +114,7 @@
         &--mica
             left: 16rem
             top: 19rem
+            transform: rotate(-20deg)
 
             @include media("<tablet")
                 left: -4rem
@@ -136,8 +137,9 @@
                     width: 23.7rem
 
         &--agus
-            right: 0
             bottom: 0
+            right: 0
+            transform: rotate(20deg)
 
             @include media("<tablet")
                 bottom: 12rem
@@ -147,8 +149,8 @@
                 right: -2.6rem
 
             figcaption
-                top: 16rem
                 left: -14rem
+                top: 16rem
 
                 @include media("<tablet")
                     top: 2rem
@@ -193,7 +195,7 @@
     &__text
         @extend %text-24
 
-        color: $text-color-2
+        color: $text-color
         display: flex
         gap: 14.2rem
         margin-top: 8rem

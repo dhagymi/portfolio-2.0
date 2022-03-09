@@ -149,6 +149,8 @@ export default class Page {
 				{ autoAlpha: 0 },
 				{
 					autoAlpha: 1,
+					ease: "circ.in",
+					duration: 0.3,
 				}
 			);
 
@@ -164,6 +166,8 @@ export default class Page {
 
 			this.animationOut.to(element, {
 				autoAlpha: 0,
+				ease: "circ.out",
+				duration: 0.3,
 				onComplete: resolve,
 			});
 		});
