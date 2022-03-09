@@ -93,7 +93,7 @@ export default class Works extends Page {
 
 				card.children[0].children[0].style.fontSize = "2rem";
 				card.children[0].children[0].style.margin = "1rem .5rem";
-				card.children[0].children[0].style.bottom = "-4.5rem";
+				card.children[0].children[0].style.top = "100%";
 				card.children[0].children[0].style.left = "0";
 			});
 
