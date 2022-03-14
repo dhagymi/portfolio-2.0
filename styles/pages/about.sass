@@ -162,14 +162,13 @@
         &__title
             @extend %title-120
 
+            color: $component-color
             position: absolute
 
             @include media("<tablet")
-                color: $component-color
                 font-size: 7.4rem
 
             @include media("<phone")
-                color: $text-color
                 font-size: 5rem
 
         &__text
