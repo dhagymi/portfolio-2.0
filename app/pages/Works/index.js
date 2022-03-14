@@ -34,8 +34,6 @@ export default class Works extends Page {
 		super.create();
 
 		this.positionCards();
-
-		alert(deviceDetection.isWebPSupported());
 	}
 
 	createAnimations() {
