@@ -34,6 +34,8 @@ export default class Works extends Page {
 		super.create();
 
 		this.positionCards();
+
+		alert(deviceDetection.isWebPSupported());
 	}
 
 	createAnimations() {
@@ -104,7 +106,7 @@ export default class Works extends Page {
 			this.elements.cardsWrapper.style[this.gridGapPrefix] = `7rem`;
 			this.elements.cardsWrapper.style.padding = `27rem 1rem 12rem`;
 
-			this.elements.title.style.left = "5rem";
+			this.elements.title.style.left = "calc((100vw - 30rem) / 2)";
 			this.elements.title.style.top = "0";
 			this.elements.title.style.marginTop = "16rem";
 			this.elements.title.style.width = "100%";
