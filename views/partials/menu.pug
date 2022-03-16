@@ -28,4 +28,7 @@ nav.menu
         ul.menu__social__list
             each item in social
                 li.menu__social__list__item
-                    a.menu__social__list__link(href=item.link.url target=item.link.target)!=item.svg
+                    a.menu__social__list__link(href=item.link.url target=item.link.target)
+                        if item.letter 
+                            span(class=`menu__social__list__letter menu__social__list__letter--${item.letter.toLowerCase()}`)=item.letter
+                        div!=item.svg
