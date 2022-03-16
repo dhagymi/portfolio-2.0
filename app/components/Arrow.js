@@ -1,4 +1,5 @@
 import Component from "classes/Component.js";
+import GSAP from "gsap";
 
 export default class Arrow extends Component {
 	constructor({ template }) {
@@ -89,6 +90,24 @@ export default class Arrow extends Component {
 					"cursor__circle--scroll"
 				);
 		}
+	}
+
+	/* Animations */
+
+	show() {
+		return new Promise((resolve) => {
+			this.timeline = GSAP.timeline();
+			this.timeline.to(this.element, { display: "block" });
+			this.timeline.to(this.element, { autoAlpha: 1, onComplete: resolve });
+		});
+	}
+
+	hide() {
+		return new Promise((resolve) => {
+			this.timeline = GSAP.timeline();
+			this.timeline.to(this.element, { autoAlpha: 0, onComplete: resolve });
+			this.timeline.to(this.element, { display: "none" });
+		});
 	}
 
 	/* Listeners */

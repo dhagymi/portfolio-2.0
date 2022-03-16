@@ -5,6 +5,7 @@ import { each, map } from "lodash";
 
 import Fade from "animations/Fade.js";
 import Magnetic from "animations/Magnetic.js";
+import Float from "animations/Float.js";
 
 import Scroll from "classes/Scroll.js";
 import AsyncLoad from "classes/AsyncLoad.js";
@@ -17,6 +18,7 @@ export default class Page {
 
 			animationsFades: '[data-animationfade="true"]',
 			animationsMagnetic: '[data-animationmagnetic="true"]',
+			animationsFloat: '[data-animationfloat="true"]',
 
 			preloaders: "[data-src]",
 		};
@@ -93,6 +95,16 @@ export default class Page {
 				}),
 			];
 		}
+
+		if (this.elements.animationsFloat?.length > 1) {
+			this.animationsFloat = map(this.elements.animationsFloat, (element) => {
+				return new Float({ element });
+			});
+		} else if (this.elements.animationsFloat) {
+			this.animationsFloat = [
+				new Float({ element: this.elements.animationsFloat }),
+			];
+		}
 	}
 
 	createPreloader() {
@@ -149,6 +161,8 @@ export default class Page {
 				{ autoAlpha: 0 },
 				{
 					autoAlpha: 1,
+					ease: "circ.in",
+					duration: 0.3,
 				}
 			);
 
@@ -164,6 +178,8 @@ export default class Page {
 
 			this.animationOut.to(element, {
 				autoAlpha: 0,
+				ease: "circ.out",
+				duration: 0.3,
 				onComplete: resolve,
 			});
 		});
@@ -173,6 +189,9 @@ export default class Page {
 
 	update() {
 		this.scroll.interpolate();
+
+		this.animationsFloat?.length &&
+			map(this.animationsFloat, (animation) => animation.update());
 
 		if (this.elements.wrapper) {
 			this.elements.wrapper.style[

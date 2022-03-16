@@ -14,12 +14,13 @@
                         a.header__navigation__list__link(href=Link(lang, item.link))
                             span.header__navigation__list__label(data-section=item.label[0].en.toLowerCase())=item.label[0][lang]
 
-    footer.footer 
-        ul.footer__list
-            each item in languages
-                li.footer__list__item
-                    a.footer__list__link(href="/")
-                        span.footer__list__label(data-language=item.short_key)=item.label[0][lang]
+    if availableLangs.length > 1
+        footer.footer 
+            ul.footer__list
+                each item in languages
+                    li.footer__list__item
+                        a.footer__list__link(href="/")
+                            span.footer__list__label(data-language=item.short_key)=item.label[0][lang]
 
 .options__arrow
     .options__arrow__wrapper!=header.data.arrow_svg

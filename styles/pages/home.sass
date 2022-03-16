@@ -20,7 +20,7 @@
         padding: 23.6rem 30.9rem
 
         @include media("<tablet")
-            padding: 16rem 7.9rem
+            padding: 12rem 7.9rem
 
         @include media("<phone")
             padding: 11rem 2.9rem
@@ -43,6 +43,7 @@
         &__line
             display: block
             pointer-events: all
+            user-select: none
 
             &--1
                 margin-left: -10rem
@@ -125,7 +126,7 @@
 
             figcaption
                 bottom: 3.3rem
-                right: 5.5rem
+                left: 0
 
                 @include media("<tablet")
                     bottom: -4rem
@@ -136,8 +137,8 @@
                     width: 23.7rem
 
         &--agus
-            right: 0
             bottom: 0
+            right: 0
 
             @include media("<tablet")
                 bottom: 12rem
@@ -147,8 +148,8 @@
                 right: -2.6rem
 
             figcaption
-                top: 16rem
-                left: -14rem
+                left: 2rem
+                bottom: 14rem
 
                 @include media("<tablet")
                     top: 2rem
@@ -193,7 +194,7 @@
     &__text
         @extend %text-24
 
-        color: $text-color-2
+        color: $text-color
         display: flex
         gap: 14.2rem
         margin-top: 8rem

@@ -1,6 +1,8 @@
 import { Camera, Renderer, Transform } from "ogl";
 import normalizeWheel from "normalize-wheel";
 
+import deviceDetection from "classes/DeviceDetection.js";
+
 import Works from "./Works/index.js";
 import General from "./General/index.js";
 
@@ -43,7 +45,11 @@ export default class Canvas {
 
 		this.gl = this.renderer.gl;
 
-		document.body.appendChild(this.gl.canvas);
+		if (!deviceDetection.isPhone() || this.isGeneral) {
+			if (deviceDetection.isWebPSupported()) {
+				document.body.appendChild(this.gl.canvas);
+			}
+		}
 	}
 
 	createCamera() {
@@ -102,11 +108,12 @@ export default class Canvas {
 
 	onChange(template, isPreloaded) {
 		if (this.isGeneral) {
-			this.createGeneral();
 			this.general.show(isPreloaded);
 		} else {
 			if (template === "works") {
-				this.createWorks();
+				if (!this.works) {
+					this.createWorks();
+				}
 				this.works.show(isPreloaded);
 			} else if (this.works) {
 				this.destroyWorks();

@@ -79,32 +79,34 @@
             @include media("<phone")
                 margin-right: 0
                 margin-left: 3.2rem
+                margin-top: 27.2rem
 
             .about__card
 
                 &__title
-                    bottom: 26.2rem
                     right: -19.5rem
+                    top: 35%
 
                     @include media("<tablet")
-                        bottom: 2.2rem
                         right: -2rem
+                        top: 64%
 
                     @include media("<phone")
-                        bottom: 13.7rem
                         right: 3.4rem
+                        top: 61%
 
                 &__text
-                    bottom: 2rem
                     right: -11.4rem
+                    top: 59%
 
                     @include media("<tablet")
-                        bottom: -23rem
                         right: 0.6rem
+                        top: 90%
 
                     @include media("<phone")
-                        bottom: -16rem
                         right: 3.4rem
+                        text-align: right
+                        top: 81%
 
         &--agus
             margin-left: 40.5rem
@@ -121,29 +123,29 @@
             .about__card
 
                 &__title
-                    bottom: 35.2rem
                     left: -18rem
+                    top: 35%
 
                     @include media("<tablet")
-                        bottom: 7.6rem
                         left: -3.2rem
+                        top: 50%
 
                     @include media("<phone")
-                        bottom: 13.5rem
                         left: -5.2rem
+                        top: 64%
 
                 &__text
-                    bottom: 11rem
                     left: -10rem
+                    top: 55%
 
                     @include media("<tablet")
-                        bottom: -16.8rem
                         font-size: 1.7rem
                         left: 3rem
+                        top: 74%
 
                     @include media("<phone")
-                        bottom: -14.8rem
                         left: -5.2rem
+                        top: 84%
 
         &__imageWrapper
             height: 57.8rem
@@ -158,20 +160,23 @@
                 width: 26rem
 
         &__image
-            width: 100%
-            height: 100%
+            width: 80%
+            height: 80%
+
+            @include media("<tablet")
+                width: 100%
+                height: 100%
 
         &__title
             @extend %title-120
 
+            color: $component-color
             position: absolute
 
             @include media("<tablet")
-                color: $component-color
                 font-size: 7.4rem
 
             @include media("<phone")
-                color: $text-color
                 font-size: 5rem
 
         &__text
@@ -204,14 +209,14 @@
 
         @include media("<tablet")
             grid-template-rows: 12.4rem 26.6rem 31.5rem
-            margin-top: 64.1rem
+            margin-top: 51.1rem
             padding: 0 6.1rem 24rem
 
         @include media("<phone")
             gap: 5rem
             grid-template-columns: 1fr
             grid-template-rows: 4.4rem 38.8rem 28rem 28rem
-            margin-top: 25.6rem
+            margin-top: 35.6rem
             padding: 0 3.1rem 24rem
 
         &__title

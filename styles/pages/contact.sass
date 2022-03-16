@@ -7,13 +7,16 @@
     &--active
         @extend %page--active
 
+    &__wrapper
+        display: flex
+        align-items: center
+
     &__container
         display: grid
         grid-template-columns: 69.1rem 12.1rem 48.3rem
         grid-template-rows: 42.4rem 27.6rem 1.3rem 5rem
         margin: 0 38.3rem 0 24.3rem
         padding: 19.6rem 0 11.7rem 0
-        min-height: 100vh
 
         @include media("<tablet")
             grid-template-columns: 19.1rem 33.1rem 27.3rem
@@ -64,7 +67,7 @@
     &__subtitles
         grid-column: 3/4
         grid-row: 1/2
-        line-height: 2.75
+        line-height: 2.2
         margin-left: 7.7rem
         margin-top: 17.6rem
 
@@ -102,13 +105,14 @@
         grid-row: 2/4
         letter-spacing: 0.15rem
         line-height: 1.25
-        margin-top: -1.8rem
+        margin-top: -5.8rem
 
         @include media("<tablet")
             grid-row: 2/3
+            margin-top: -1.8rem
 
         @include media("<phone")
-            grid-column: 1/3
+            grid-column: 1/4
             letter-spacing: 0.05rem
             line-height: 1.4
             margin-left: 3.6rem
@@ -118,11 +122,16 @@
             @extend %title-74
 
             display: block
+            line-height: 1.4
             text-align: left
 
             &--1
 
             &--1
+
+        &__link
+            display: block
+            text-align: left
 
         &__button
             @extend %button-42
@@ -130,7 +139,7 @@
             border: 2px solid $component-color
             color: $component-color
             height: 8rem
-            margin-top: 4rem
+            margin-top: 2rem
             transition: background .3s, color .3s
             width: 60rem
 

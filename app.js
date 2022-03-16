@@ -17,7 +17,7 @@ dotenv.config();
 const PORT = process.env.PORT || 5000;
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const router = new Router();
-const availableLangs = ["en", "es"];
+const availableLangs = ["en"];
 
 /* Middlewares */
 
@@ -68,7 +68,11 @@ app.use((req, res, next) => {
 
 	res.locals.Link = handleLinkResolver;
 
+	res.locals.availableLangs = availableLangs;
+
 	res.locals.PrismicDOM = PrismicDOM;
+
+	res.locals.pathname = req.path.slice(1);
 
 	next();
 });

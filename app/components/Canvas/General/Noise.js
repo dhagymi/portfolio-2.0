@@ -1,6 +1,8 @@
 import { Mesh, Program } from "ogl";
 import GSAP from "gsap";
 
+import deviceDetection from "classes/DeviceDetection.js";
+
 import fragment from "shaders/general-fragment.glsl";
 import vertex from "shaders/general-vertex.glsl";
 
@@ -16,6 +18,10 @@ export default class {
 		this.createBounds({
 			sizes: this.sizes,
 		});
+
+		this.uAlpha = deviceDetection.isPhone() ? 0.05 : 0.1;
+
+		this.stepTime = 0;
 	}
 
 	createProgram() {
@@ -58,7 +64,7 @@ export default class {
 			{
 				duration: 2,
 				ease: "expo.inOut",
-				value: 0.03,
+				value: this.uAlpha,
 			},
 			"start"
 		);
@@ -83,6 +89,9 @@ export default class {
 	}
 
 	update(time) {
-		this.program.uniforms.uTime.value = parseFloat(time * 0.001);
+		if (time - this.stepTime > 30) {
+			this.stepTime = time;
+			this.program.uniforms.uTime.value = parseFloat(time * 0.001);
+		}
 	}
 }

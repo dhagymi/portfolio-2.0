@@ -1,6 +1,6 @@
 import { each } from "lodash";
 
-import LanguageDetection from "classes/LanguageDetection.js";
+import languageDetection from "classes/LanguageDetection.js";
 
 import About from "pages/About/index.js";
 import Home from "pages/Home/index.js";
@@ -23,6 +23,7 @@ class App {
 
 		this.createGeneralCanvas();
 		this.createCanvas();
+
 		this.createCursor();
 		this.createPreloader();
 		this.createMenu();
@@ -46,7 +47,7 @@ class App {
 	/* Creates */
 
 	createLang() {
-		this.lang = LanguageDetection.detectLanguage();
+		this.lang = languageDetection.detectLanguage();
 	}
 
 	createGeneralCanvas() {
@@ -283,10 +284,18 @@ class App {
 				this.options.onResize(this.page.elements.wrapper);
 			}
 			if (this.scrollBar?.onResize) {
-				this.scrollBar.onResize(this.page.elements.wrapper);
+				this.scrollBar.onResize(
+					this.template === "works"
+						? this.page.elements.cardsWrapper
+						: this.page.elements.wrapper
+				);
 			}
 			if (this.arrow?.onResize) {
-				this.arrow.onResize(this.page.elements.wrapper);
+				this.arrow.onResize(
+					this.template === "works"
+						? this.page.elements.cardsWrapper
+						: this.page.elements.wrapper
+				);
 			}
 			window.requestAnimationFrame((_) => {
 				if (this.generalCanvas && this.generalCanvas.onResize) {
@@ -294,11 +303,9 @@ class App {
 				}
 			});
 
-			window.requestAnimationFrame((_) => {
-				if (this.canvas && this.canvas.onResize) {
-					this.canvas.onResize();
-				}
-			});
+			if (this.canvas && this.canvas.onResize) {
+				this.canvas.onResize();
+			}
 		}
 	}
 
