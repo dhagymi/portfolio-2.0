@@ -121,7 +121,7 @@ class App {
 
 	createTitle() {
 		this.title = document.querySelector("title");
-		this.title.innerText = `DHÁ Team  |  ${this.page.title[this.lang]}`;
+		this.title.innerText = `DHÁ | ${this.page.title[this.lang]}`;
 	}
 
 	/* Links */
