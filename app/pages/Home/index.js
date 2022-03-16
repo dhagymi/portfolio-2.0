@@ -13,7 +13,7 @@ export default class Home extends Page {
 				germanyLabel: ".home__title__line--5",
 			},
 			title: {
-				en: "Developers & Designers",
+				en: "Turn ideas into projects",
 				es: "Desarrolladores y diseñadores",
 			},
 		});
