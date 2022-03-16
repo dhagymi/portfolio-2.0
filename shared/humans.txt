@@ -1,10 +1,10 @@
 /* SITE INFORMATION */
 
 	Site name:  	DHA Portfolio
-	Site URL:   	https://dha-portfolio.herokuapp.com/
+	Site URL:   	https://wearedha.com/
 	Web develop:	Agustín Andreacchi
 	Web design:		Micaela Zayas
-	Contact:    	https://dha-portfolio.herokuapp.com/en/contact/
+	Contact:    	https://wearedha.com/en/contact/
 	Location:   	Germany
 	Built with: 	Express
 	Launched:   	2022
