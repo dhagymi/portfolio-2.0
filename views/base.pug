@@ -45,11 +45,11 @@ html(class=isDesktop ? "desktop" : isTablet ? "tablet" : isPhone ? "phone" : "" 
 
         link(href="main.css" rel="stylesheet")
 
-        // script(type="application/ld+json")!=`{"@context":"http://schema.org","@type":"Event","name":"${concertsList[0][0].data.title}","startDate":"${concertsList[0][0].data.year}-${concertsList[0][0].data.month}-${concertsList[0][0].data.day}T${concertsList[0][0].data.hours}:${concertsList[0][0].data.minutes}","location":{"@type":"Place","name":"${concertsList[0][0].data.location}"},"description":"${concertsList[0][0].data.description}","url":"https://ramirozayas.com/concerts","performer":{"@type":"Person","name":"Ramiro Zayas"},"offers":{"@type":"Offer","price":"${concertsList[0][0].data.price}"},"sameAs":["https://twitter.com/${meta.data.twitter}","${meta.data.facebook}","${meta.data.youtube}","${meta.data.instagram}","${meta.data.linkedin}"]}`       
-        // script(type="text/javascript" defer src="https://www.google-analytics.com/analytics.js")
-        // script(defer src="//www.google-analytics.com/analytics.js")
-        // script(async src="https://www.googletagmanager.com/gtag/js?id=G-90LW69N0XS")
-        // script!=`window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-90LW69N0XS');`
+        script(type="application/ld+json")!=`{"@context" : "http://schema.org","@type" : "LocalBusiness","name" : "dhá","image" : "https://images.prismic.io/dha-portfolio/d4a0c939-89c1-4279-afba-2ba6ebdb3724_2.png?auto=compress,format","telephone" : "+49 15256042808","email" : "dhadesigners@gmail.com","address" : {  "@type" : "PostalAddress",  "addressLocality" : "München",  "addressRegion" : "Bayern",  "addressCountry" : "Germany",  "postalCode" : "80686"},"openingHoursSpecification" : {  "@type" : "OpeningHoursSpecification",  "dayOfWeek" : {    "@type" : "DayOfWeek",    "name" : "Lunes"  },  "opens" : "Inserta una fecha/hora válida con formato ISO 8601 aquí. Ejemplos: 2015-07-27 o 2015-07-27T15:30",  "closes" : "Inserta una fecha/hora válida con formato ISO 8601 aquí. Ejemplos: 2015-07-27 o 2015-07-27T15:30"}}`
+        script(type="text/javascript" defer src="https://www.google-analytics.com/analytics.js")
+        script(defer src="//www.google-analytics.com/analytics.js")
+        script(async src="https://www.googletagmanager.com/gtag/js?id=G-22M558Y1LW")
+        script!=`window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-22M558Y1LW');`
 
 
     body
