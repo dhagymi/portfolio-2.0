@@ -99,11 +99,11 @@ export default class {
 	onTouchDown({ y }) {}
 
 	onTouchMove({ y }) {
-		this.y.target -= y.difference * 4;
+		this.y.target -= y.difference * 3;
 	}
 
 	onTouchUp({ y }) {
-		this.y.target -= y.difference * 4;
+		this.y.target -= y.difference * 3;
 	}
 
 	onWheel({ pixelY }) {
