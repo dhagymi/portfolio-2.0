@@ -32,10 +32,6 @@ app.use(compression());
 
 app.use(express.static(join(__dirname, "public")));
 
-/* Router */
-
-/* app.use("/api", router); */
-
 const initApi = (req) => {
 	return Prismic.getApi(process.env.PRISMIC_ENDPOINT, {
 		accessToken: process.env.PRISMIC_ACCESS_TOKEN,
