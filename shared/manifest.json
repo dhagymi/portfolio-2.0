@@ -1,5 +1,14 @@
 {
-	"name": "App",
+	"name": "Portfolio DHÁ",
+	"short_name": "DHÁ",
+	"description": "Dhá covers every aspect of your digital needs and solve problems through design and technology.",
+	"background_color": "#1A1A1A",
+	"theme_color": "#FFFFFF",
+	"start_url": "./?umt_source=web_app_manifest",
+	"scope": "./",
+	"lang": "en",
+	"display": "fullscreen",
+	"orientation": "portrait",
 	"icons": [
 		{
 			"src": "/icons/android-icon-36x36.png",

@@ -2,6 +2,7 @@
     header.header
 
         a.header__logo(href=Link(lang, header.data.logo_link))!=meta.data.title[0][lang]+header.data.logo_svg
+            img.header__logo__img(src=header.data.logo_img.url, alt=header.data.logo_img.alt)
 
         button(class=`header__responsiveMenuButton ${isDesktop ? "" : "header__responsiveMenuButton--visible"}`)
             .header__responsiveMenuButton__stripe.header__responsiveMenuButton__stripe--1
