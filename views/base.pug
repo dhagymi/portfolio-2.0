@@ -34,18 +34,18 @@ html(class=isDesktop ? "desktop" : isTablet ? "tablet" : isPhone ? "phone" : "" 
         meta(property="og:type" content="website")
         meta(property="og:title" content=meta.data.title[0][lang])
         meta(property="og:description" content=meta.data.description[0][lang])
-        meta(property="og:image" content=meta.data.image ? meta.data.image.url : '')
+        meta(property="og:image" content=header.data.logo_img ? header.data.logo_img.url : '')
         meta(property="og:url" content=meta.data.canonical)
 
         meta(name="twitter:card" content="summary_large_image")
         meta(name="twitter:title" content=meta.data.title[0][lang])
         meta(name="twitter:description" content=meta.data.description[0][lang])
-        meta(name="twitter:image" content=meta.data.image ? meta.data.image.url : '')
+        meta(name="twitter:image" content=header.data.logo_img ? header.data.logo_img.url : '')
         meta(name="twitter:site" content=`@${meta.data.twitter}`)
 
         link(href="main.css" rel="stylesheet")
 
-        script(type="application/ld+json")!=`{"@context":"https://schema.org","@type":"Corporation","name":"dhá","url":"https://wearedha.com","logo":"https://images.prismic.io/dha-portfolio/d4a0c939-89c1-4279-afba-2ba6ebdb3724_2.png","sameAs": ["${meta.data.facebook}","https://twitter.com/${meta.data.twitter}","${meta.data.instagram}","${meta.data.youtube}","${meta.data.linkedin}","https://github.com/dhagymi"]}`
+        script(type="application/ld+json")!=`{"@context":"https://schema.org","@type":"Corporation","name":"dhá","url":"${header.data.logo_img.url}","sameAs": ["${meta.data.facebook}","https://twitter.com/${meta.data.twitter}","${meta.data.instagram}","${meta.data.youtube}","${meta.data.linkedin}","https://github.com/dhagymi"]}`
         script(type="text/javascript" defer src="https://www.google-analytics.com/analytics.js")
         script(defer src="//www.google-analytics.com/analytics.js")
         script(async src="https://www.googletagmanager.com/gtag/js?id=G-22M558Y1LW")
