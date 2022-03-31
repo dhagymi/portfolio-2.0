@@ -1,42 +1,46 @@
 class DeviceDetection {
-	isPhone() {
-		if (!this.isPhoneChecked) {
-			this.isPhoneChecked = true;
+    isPhone() {
+        if (!this.isPhoneChecked) {
+            this.isPhoneChecked = true;
 
-			this.isPhoneCheck = document.documentElement.classList.contains("phone");
-		}
+            this.isPhoneCheck =
+                document.documentElement.classList.contains("phone");
+        }
 
-		return this.isPhoneCheck;
-	}
+        return this.isPhoneCheck;
+    }
 
-	isTablet() {
-		if (!this.isTabletChecked) {
-			this.isTabletChecked = true;
+    isTablet() {
+        if (!this.isTabletChecked) {
+            this.isTabletChecked = true;
 
-			this.isTabletCheck = document.documentElement.classList.contains("phone");
-		}
+            this.isTabletCheck =
+                document.documentElement.classList.contains("tablet");
+        }
 
-		return this.isTabletCheck;
-	}
+        return this.isTabletCheck;
+    }
 
-	isDesktop() {
-		return !this.isPhone();
-	}
+    isDesktop() {
+        return !this.isPhone() && !this.isTablet();
+    }
 
-	isWebPSupported() {
-		if (!this.isWebPChecked) {
-			this.isWebPChecked = true;
+    isWebPSupported() {
+        if (!this.isWebPChecked) {
+            this.isWebPChecked = true;
 
-			const element = document.createElement("canvas");
+            const element = document.createElement("canvas");
 
-			if (element.getContext && element.getContext("2d")) {
-				this.isWebPCheck =
-					element.toDataURL("image/webp").indexOf("data:image/webp") === 0;
-			}
-		}
+            if (element.getContext && element.getContext("2d")) {
+                this.isWebPCheck =
+                    element
+                        .toDataURL("image/webp")
+                        .indexOf("data:image/webp") === 0;
+            }
+        }
 
-		return this.isWebPCheck;
-	}
+        return this.isWebPCheck;
+    }
 }
 
 const DetectionManager = new DeviceDetection();
