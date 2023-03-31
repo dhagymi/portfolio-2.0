@@ -31,4 +31,4 @@ jobs:
     - run: export PRISMIC_ENDPOINT=https://dha-portfolio.prismic.io/api/v2
     - run: export EMAIL_DIRECTION=${{ secrets.EMAIL_DIRECTION }}
     - run: export EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}
-    - run: PM2_HOME='/root/actions-runner/.pm2' pm2 restart wearedha --update-env
+    - run: PM2_HOME='/root/actions-runner/.pm2' pm2 restart wearedha.com --update-env
