@@ -226,4 +226,5 @@ app.get("/", (req, res) => {
 const server = app.listen(PORT, () =>
     console.log(`Serve on http://localhost:${PORT}`)
 );
+
 server.on("error", (error) => console.log(error));
