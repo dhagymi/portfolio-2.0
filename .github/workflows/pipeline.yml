@@ -25,6 +25,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: yarn
     - run: yarn build
-    - run: pm2 kill
-    - run: pm2 start ./app.js --name wearedha.com
-    - run: pm2 save
+    - run: export PRISMIC_ACCESS_TOKEN=${{ secrets.PRISMIC_ACCESS_TOKEN }}
+    - run: export PRISMIC_CLIENT_ID=${{ secrets.PRISMIC_CLIENT_ID }}
+    - run: export PRISMIC_CLIENT_SECRET=${{ secrets.PRISMIC_CLIENT_SECRET }}
+    - run: export PRISMIC_ENDPOINT=https://dha-portfolio.prismic.io/api/v2
+    - run: export EMAIL_DIRECTION=${{ secrets.EMAIL_DIRECTION }}
+    - run: export EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}
+    - run: PM2_HOME='/root/actions-runner/.pm2' pm2 restart wearedha.com --update-env
