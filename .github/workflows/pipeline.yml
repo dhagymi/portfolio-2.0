@@ -25,5 +25,4 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: yarn
     - run: yarn build
-    - run: export HOME="/root"
-    - run: pm2 restart all
+    - run: HOME="/root" pm2 restart app --update-env
