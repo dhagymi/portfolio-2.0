@@ -25,7 +25,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: yarn
     - run: yarn build
-    - run: export PM2_HOME="/root/.pm2"
     - run: export PRISMIC_ACCESS_TOKEN=${{ secrets.PRISMIC_ACCESS_TOKEN }}
     - run: export PRISMIC_CLIENT_ID=${{ secrets.PRISMIC_CLIENT_ID }}
     - run: export PRISMIC_CLIENT_SECRET=${{ secrets.PRISMIC_CLIENT_SECRET }}
